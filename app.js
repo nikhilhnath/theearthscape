@@ -16,21 +16,50 @@ fetch('data.json')
     const booked = data.timeSeries.map(q => q.sales.booked);
     const unsold = data.timeSeries.map(q => q.sales.unsold);
 
-    // 3. Escrow Combo Chart (Bars for inputs/outputs, Line for balance)
+    // HELPER: Convert raw numbers to Indian formats (Crores & Lakhs)
+    const formatINR = (value) => {
+      if (value >= 10000000) return '₹' + (value / 10000000).toFixed(2) + ' Cr';
+      if (value >= 100000) return '₹' + (value / 100000).toFixed(2) + ' L';
+      return '₹' + value.toLocaleString('en-IN');
+    };
+
+    // 3. Escrow Combo Chart (Includes INR Tooltips & Y-Axis formatting)
     new Chart(document.getElementById('escrowChart').getContext('2d'), {
       type: 'bar',
       data: {
         labels: quarters,
         datasets: [
-          { type: 'line', label: 'Escrow Balance (₹)', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3 },
-          { type: 'bar', label: 'Total Collected (₹)', data: collected, backgroundColor: '#3b82f6', borderRadius: 4 },
-          { type: 'bar', label: 'Total Withdrawn (₹)', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4 }
+          { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3 },
+          { type: 'bar', label: 'Total Collected', data: collected, backgroundColor: '#3b82f6', borderRadius: 4 },
+          { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4 }
         ]
       },
-      options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false } }
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + formatINR(context.raw);
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: function(value) {
+                return formatINR(value);
+              }
+            }
+          }
+        }
+      }
     });
 
-    // 4. Sales Combo Chart (Bars for bookings, Line for remaining inventory)
+    // 4. Sales Combo Chart (Unit count, no INR formatting needed)
     new Chart(document.getElementById('salesChart').getContext('2d'), {
       type: 'bar',
       data: {
@@ -40,7 +69,11 @@ fetch('data.json')
           { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4 }
         ]
       },
-      options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false } }
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        interaction: { mode: 'index', intersect: false } 
+      }
     });
 
     // 5. Reusable Flipcard Generator Function
@@ -95,7 +128,7 @@ fetch('data.json')
       });
     });
 
-    // 8. Photo Timeline (Same as before)
+    // 8. Photo Timeline
     const gallery = document.getElementById('photoGalleryContainer');
     data.photos.forEach(photo => {
       gallery.innerHTML += `
