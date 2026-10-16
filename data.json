@@ -59,6 +59,71 @@
       "backDesc": "Context: Ground and first-floor slabs have been cast for Wings A and B. Shuttering and steel reinforcement work is actively ongoing for the 2nd-floor slabs.\n\nTarget: Oct 2026 | Expected: Oct 2026"
     }
   ],
+  "towerProgress": [
+    {
+      "wing": "Wing A",
+      "floors": [
+        { "name": "Floor 15", "progress": 0 },
+        { "name": "Floor 14", "progress": 0 },
+        { "name": "Floor 13", "progress": 0 },
+        { "name": "Floor 12", "progress": 0 },
+        { "name": "Floor 11", "progress": 0 },
+        { "name": "Floor 10", "progress": 0 },
+        { "name": "Floor 9", "progress": 0 },
+        { "name": "Floor 8", "progress": 0 },
+        { "name": "Floor 7", "progress": 0 },
+        { "name": "Floor 6", "progress": 0 },
+        { "name": "Floor 5", "progress": 0 },
+        { "name": "Floor 4", "progress": 0 },
+        { "name": "Floor 3", "progress": 20 },
+        { "name": "Floor 2", "progress": 60 },
+        { "name": "Floor 1", "progress": 100 },
+        { "name": "Ground", "progress": 100 }
+      ]
+    },
+    {
+      "wing": "Wing B",
+      "floors": [
+        { "name": "Floor 15", "progress": 0 },
+        { "name": "Floor 14", "progress": 0 },
+        { "name": "Floor 13", "progress": 0 },
+        { "name": "Floor 12", "progress": 0 },
+        { "name": "Floor 11", "progress": 0 },
+        { "name": "Floor 10", "progress": 0 },
+        { "name": "Floor 9", "progress": 0 },
+        { "name": "Floor 8", "progress": 0 },
+        { "name": "Floor 7", "progress": 0 },
+        { "name": "Floor 6", "progress": 0 },
+        { "name": "Floor 5", "progress": 0 },
+        { "name": "Floor 4", "progress": 0 },
+        { "name": "Floor 3", "progress": 10 },
+        { "name": "Floor 2", "progress": 40 },
+        { "name": "Floor 1", "progress": 100 },
+        { "name": "Ground", "progress": 100 }
+      ]
+    },
+    {
+      "wing": "Wing C",
+      "floors": [
+        { "name": "Floor 15", "progress": 0 },
+        { "name": "Floor 14", "progress": 0 },
+        { "name": "Floor 13", "progress": 0 },
+        { "name": "Floor 12", "progress": 0 },
+        { "name": "Floor 11", "progress": 0 },
+        { "name": "Floor 10", "progress": 0 },
+        { "name": "Floor 9", "progress": 0 },
+        { "name": "Floor 8", "progress": 0 },
+        { "name": "Floor 7", "progress": 0 },
+        { "name": "Floor 6", "progress": 0 },
+        { "name": "Floor 5", "progress": 0 },
+        { "name": "Floor 4", "progress": 0 },
+        { "name": "Floor 3", "progress": 0 },
+        { "name": "Floor 2", "progress": 0 },
+        { "name": "Floor 1", "progress": 20 },
+        { "name": "Ground", "progress": 85 }
+      ]
+    }
+  ],
   "legalRiskMatrix": [
     { 
       "title": "Active Litigation", 
