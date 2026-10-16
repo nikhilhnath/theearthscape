@@ -65,3 +65,13 @@
       "title": "KPTCL Corridor", 
       "status": "Pending", 
       "frontDesc": "Underground shifting of adjacent HT power lines.",
+      "backDesc": "Context: High-Tension (HT) lines need shifting for safety corridor clearance. \n\nRisk Impact: The developer has submitted the application and initial fee; currently awaiting the KPTCL execution schedule to commence the underground routing."
+    },
+    { 
+      "title": "Title Rectification", 
+      "status": "Cleared", 
+      "frontDesc": "Tracing full titles across all 6 survey numbers.",
+      "backDesc": "Context: RERA initially registered only Sy No. 63/2. \n\nResolution: The title trace has now been legally rectified and updated on the RERA portal to include all constituent Wing A parcels (63/2, 62/5, 63/4, 63/5, 62/4, 63/3)."
+    }
+  ]
+}
