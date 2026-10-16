@@ -28,24 +28,45 @@
     .rotate-y-180 { transform: rotateY(180deg); }
     @media (hover: hover) { .flip-card:hover .flip-card-inner { transform: rotateY(180deg); } }
     .flipped { transform: rotateY(180deg); }
+    
+    /* Timeline connecting line */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 15px;
+      width: 4px;
+      background: #e2e8f0;
+      z-index: 0;
+    }
   </style>
 </head>
 <body class="bg-slate-50 p-4 md:p-8 font-sans">
 
   <div class="max-w-6xl mx-auto space-y-8">
     
-    <!-- Header (Logos Removed) -->
+    <!-- Header with Overall Progress Donut -->
     <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800" id="projectName">Loading...</h1>
           <span class="text-lg text-slate-600 font-medium font-serif italic block mt-1" id="projectSubtitle"></span>
           <p class="text-slate-500 text-sm mt-2" id="projectDetails"></p>
         </div>
 
-        <div class="bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-lg text-center shrink-0">
-          <p class="text-xs text-indigo-500 font-bold uppercase tracking-wider">Latest RERA Filing</p>
-          <p class="text-lg font-black text-indigo-900" id="updateBadge"></p>
+        <div class="flex items-center gap-6">
+          <div class="bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-lg text-center shrink-0">
+            <p class="text-xs text-indigo-500 font-bold uppercase tracking-wider">Latest RERA Filing</p>
+            <p class="text-lg font-black text-indigo-900" id="updateBadge"></p>
+          </div>
+          
+          <!-- Overall Progress Mini-Chart -->
+          <div class="relative w-24 h-24 shrink-0 flex flex-col items-center justify-center">
+            <canvas id="overallProgressChart" class="absolute inset-0 z-10"></canvas>
+            <div class="absolute inset-0 flex flex-col items-center justify-center z-0">
+              <span class="text-xl font-bold text-slate-800" id="overallPercentText"></span>
+              <span class="text-[10px] uppercase font-bold text-slate-400">Done</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +78,7 @@
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
         <h2 class="text-xl font-bold text-slate-800">Escrow Account Utilization</h2>
         <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
-          The RERA Escrow account is a mandatory bank account where 70% of homebuyer payments are deposited. These funds can only be withdrawn to cover actual construction and land costs, ensuring your money strictly builds your home.
+          The RERA Escrow account is a mandatory bank account where 70% of homebuyer payments are deposited. These funds can only be withdrawn to cover actual construction and land costs.
         </p>
         <!-- Swipeable mobile container -->
         <div class="overflow-x-auto pb-2 -mx-2 px-2">
@@ -71,7 +92,7 @@
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
         <h2 class="text-xl font-bold text-slate-800">Sales Velocity & Inventory</h2>
         <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
-          Tracking the pace of unit bookings against total available inventory in Phase 1. A steady sales velocity indicates strong market demand and ensures continuous, reliable project funding for the developer.
+          Tracking the pace of unit bookings against total available inventory. A steady sales velocity indicates strong market demand and ensures continuous, reliable project funding.
         </p>
         <!-- Swipeable mobile container -->
         <div class="overflow-x-auto pb-2 -mx-2 px-2">
@@ -80,19 +101,51 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Inventory Encumbrance Bar -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-800">Inventory Encumbrance (Mortgage Status)</h2>
+          <p class="text-sm text-slate-500 mt-1">Breakdown of developer-share units mortgaged to banks for project funding vs. unencumbered stock.</p>
+        </div>
+        <div class="mt-2 md:mt-0 font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-lg text-sm">
+          Total Phase 1 Units: <span id="totalUnitsText"></span>
+        </div>
+      </div>
+      
+      <div class="w-full h-8 bg-emerald-100 rounded-full overflow-hidden flex shadow-inner relative">
+        <div id="mortgageBar" class="h-full bg-rose-500 flex items-center justify-center text-xs font-bold text-white transition-all duration-1000 w-0"></div>
+        <div class="h-full flex-1 bg-emerald-400 flex items-center justify-center text-xs font-bold text-white" id="unencumberedText"></div>
+      </div>
+      <div class="flex justify-between text-xs font-bold mt-2 px-1">
+        <span class="text-rose-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Mortgaged Stock</span>
+        <span class="text-emerald-600 flex items-center gap-1">Unencumbered Stock <span class="w-2 h-2 rounded-full bg-emerald-400"></span></span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Construction Timeline (Left Side on Desktop) -->
+      <div class="lg:col-span-7">
+        <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Construction Timeline</h2>
+        <!-- The timeline-line class creates the vertical connecting line -->
+        <div class="relative timeline-line space-y-6" id="constructionContainer"></div>
+      </div>
+
+      <!-- Legal & NOC Flipcards (Right Side on Desktop) -->
+      <div class="lg:col-span-5">
+        <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals</h2>
+        <div class="grid grid-cols-1 gap-6" id="riskMatrixContainer"></div>
+      </div>
 
     </div>
 
-    <!-- Construction Progress Flipcards -->
+    <!-- Project Team -->
     <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Construction Progress</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="constructionContainer"></div>
-    </div>
-
-    <!-- Legal & NOC Flipcards -->
-    <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">NOC & Legal Approvals</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="riskMatrixContainer"></div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-4">The Project Team</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
     </div>
 
     <!-- RERA Verified Disclaimer -->
