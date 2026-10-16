@@ -27,9 +27,14 @@
     @media (hover: hover) { .flip-card:hover .flip-card-inner { transform: rotateY(180deg); } }
     .flipped { transform: rotateY(180deg); }
     
-    /* Scrollbar hiding for horizontal swiping */
+    /* Scrollbar hiding for clean UI */
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Custom thin scrollbar for tower elevation lists */
+    .thin-scrollbar::-webkit-scrollbar { width: 4px; }
+    .thin-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+    .thin-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
   </style>
 </head>
 <body class="bg-slate-50 p-4 md:p-8 font-sans">
@@ -44,7 +49,6 @@
           <span class="text-lg text-slate-600 font-medium font-serif italic block mt-1" id="projectSubtitle"></span>
           <p class="text-slate-500 text-sm mt-2" id="projectDetails"></p>
           
-          <!-- RERA Validity & Target Handover Pills -->
           <div class="flex flex-wrap items-center gap-3 mt-4">
             <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-md text-xs font-bold shadow-sm">
               <span class="text-emerald-500 mr-1">🎯</span> Target Handover: <span id="handoverDate"></span>
@@ -79,16 +83,20 @@
       
       <div class="overflow-x-auto pb-4 hide-scrollbar -mx-4 px-4 md:-mx-0 md:px-0">
         <div class="relative pt-4 min-w-max">
-          <!-- Continuous horizontal line -->
           <div class="absolute top-[26px] left-36 right-36 h-1 bg-slate-200 z-0"></div>
-          
-          <!-- JS injects timeline cards here -->
           <div class="flex gap-6 relative z-10" id="constructionContainer"></div>
         </div>
       </div>
     </div>
 
-    <!-- 3. Time-Series Charts Row -->
+    <!-- 3. Tower Elevation (Wing by Wing) -->
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2">Tower Elevation Status</h2>
+      <p class="text-sm text-slate-500 mb-4 ml-2">Floor-by-floor structural completion tracking for Phase 1 wings.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="towerContainer"></div>
+    </div>
+
+    <!-- 4. Time-Series Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
         <h2 class="text-xl font-bold text-slate-800">Escrow Account Utilization</h2>
@@ -115,7 +123,7 @@
       </div>
     </div>
 
-    <!-- 4. Inventory Encumbrance Bar -->
+    <!-- 5. Inventory Encumbrance Bar -->
     <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
       <div class="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">
         <div class="max-w-3xl">
@@ -139,13 +147,13 @@
       </div>
     </div>
 
-    <!-- 5. Legal & NOC Section (Sorted) -->
+    <!-- 6. Legal & NOC Section (Sorted) -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals Matrix</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="riskMatrixContainer"></div>
     </div>
 
-    <!-- 6. Shared Amenities Progress -->
+    <!-- 7. Shared Amenities Progress -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Amenities & Common Infrastructure</h2>
       <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
@@ -153,7 +161,7 @@
       </div>
     </div>
 
-    <!-- 7. The Project Team -->
+    <!-- 8. The Project Team -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">The Project Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
