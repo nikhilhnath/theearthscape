@@ -11,17 +11,15 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-6V9TR4SVDT');
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- DataLabels plugin for Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   
   <style>
-    /* CSS for the LC-136 style 3D Flip Cards */
+    /* CSS for the sleek 3D Flip Cards */
     .perspective { perspective: 1000px; }
     .preserve-3d { transform-style: preserve-3d; }
     .backface-hidden { backface-visibility: hidden; }
@@ -29,22 +27,16 @@
     @media (hover: hover) { .flip-card:hover .flip-card-inner { transform: rotateY(180deg); } }
     .flipped { transform: rotateY(180deg); }
     
-    /* Timeline connecting line */
-    .timeline-line::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0; left: 15px;
-      width: 4px;
-      background: #e2e8f0;
-      z-index: 0;
-    }
+    /* Scrollbar hiding for a cleaner look on mobile timelines */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="bg-slate-50 p-4 md:p-8 font-sans">
 
-  <div class="max-w-6xl mx-auto space-y-8">
+  <div class="max-w-6xl mx-auto space-y-10">
     
-    <!-- Header with Overall Progress Donut -->
+    <!-- 1. Header with Overall Progress Donut -->
     <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
@@ -59,7 +51,6 @@
             <p class="text-lg font-black text-indigo-900" id="updateBadge"></p>
           </div>
           
-          <!-- Overall Progress Mini-Chart -->
           <div class="relative w-24 h-24 shrink-0 flex flex-col items-center justify-center">
             <canvas id="overallProgressChart" class="absolute inset-0 z-10"></canvas>
             <div class="absolute inset-0 flex flex-col items-center justify-center z-0">
@@ -71,31 +62,42 @@
       </div>
     </div>
 
-    <!-- Time-Series Charts Row -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- 2. Full-Width Horizontal Construction Timeline -->
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2">Construction Timeline</h2>
+      <p class="text-sm text-slate-500 mb-4 ml-2">Swipe horizontally to view physical progress and schedule status.</p>
       
-      <!-- Escrow Chart -->
+      <div class="overflow-x-auto pb-4 hide-scrollbar -mx-4 px-4 md:-mx-0 md:px-0">
+        <div class="relative pt-4 min-w-max">
+          <!-- The continuous horizontal line that connects the nodes -->
+          <div class="absolute top-[28px] left-10 right-10 h-1 bg-slate-200 z-0"></div>
+          
+          <!-- The container where JS injects the timeline cards -->
+          <div class="flex gap-6 relative z-10" id="constructionContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Time-Series Charts Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
         <h2 class="text-xl font-bold text-slate-800">Escrow Account Utilization</h2>
         <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
           The RERA Escrow account is a mandatory bank account where 70% of homebuyer payments are deposited. These funds can only be withdrawn to cover actual construction and land costs.
         </p>
-        <!-- Swipeable mobile container -->
-        <div class="overflow-x-auto pb-2 -mx-2 px-2">
+        <div class="overflow-x-auto pb-2 hide-scrollbar -mx-2 px-2">
           <div class="relative h-72 w-[600px] lg:w-full">
             <canvas id="escrowChart"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- Sales Chart -->
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
         <h2 class="text-xl font-bold text-slate-800">Sales Velocity & Inventory</h2>
         <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
           Tracking the pace of unit bookings against total available inventory. A steady sales velocity indicates strong market demand and ensures continuous, reliable project funding.
         </p>
-        <!-- Swipeable mobile container -->
-        <div class="overflow-x-auto pb-2 -mx-2 px-2">
+        <div class="overflow-x-auto pb-2 hide-scrollbar -mx-2 px-2">
           <div class="relative h-72 w-[600px] lg:w-full">
             <canvas id="salesChart"></canvas>
           </div>
@@ -103,48 +105,39 @@
       </div>
     </div>
 
-    <!-- Inventory Encumbrance Bar -->
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-        <div>
+    <!-- 4. Inventory Encumbrance Bar -->
+    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+      <div class="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">
+        <div class="max-w-3xl">
           <h2 class="text-xl font-bold text-slate-800">Inventory Encumbrance (Mortgage Status)</h2>
-          <p class="text-sm text-slate-500 mt-1">Breakdown of developer-share units mortgaged to banks for project funding vs. unencumbered stock.</p>
+          <p class="text-sm text-slate-500 mt-2 leading-relaxed">
+            When a developer takes a bank loan to fund construction, they pledge unsold units as collateral. This bar tracks how many units in Phase 1 are mortgaged (encumbered) versus free to be sold without a bank lien (unencumbered). High unencumbered stock generally indicates lower financial risk.
+          </p>
         </div>
-        <div class="mt-2 md:mt-0 font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-lg text-sm">
+        <div class="mt-2 md:mt-0 font-bold text-slate-700 bg-slate-100 px-4 py-2 rounded-lg text-sm shrink-0">
           Total Phase 1 Units: <span id="totalUnitsText"></span>
         </div>
       </div>
       
-      <div class="w-full h-8 bg-emerald-100 rounded-full overflow-hidden flex shadow-inner relative">
+      <div class="w-full h-10 bg-emerald-100 rounded-full overflow-hidden flex shadow-inner relative">
         <div id="mortgageBar" class="h-full bg-rose-500 flex items-center justify-center text-xs font-bold text-white transition-all duration-1000 w-0"></div>
         <div class="h-full flex-1 bg-emerald-400 flex items-center justify-center text-xs font-bold text-white" id="unencumberedText"></div>
       </div>
-      <div class="flex justify-between text-xs font-bold mt-2 px-1">
-        <span class="text-rose-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Mortgaged Stock</span>
-        <span class="text-emerald-600 flex items-center gap-1">Unencumbered Stock <span class="w-2 h-2 rounded-full bg-emerald-400"></span></span>
+      <div class="flex justify-between text-xs font-bold mt-3 px-2">
+        <span class="text-rose-600 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Mortgaged Stock</span>
+        <span class="text-emerald-600 flex items-center gap-1.5">Unencumbered Stock <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span></span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
-      <!-- Construction Timeline (Left Side on Desktop) -->
-      <div class="lg:col-span-7">
-        <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Construction Timeline</h2>
-        <!-- The timeline-line class creates the vertical connecting line -->
-        <div class="relative timeline-line space-y-6" id="constructionContainer"></div>
-      </div>
-
-      <!-- Legal & NOC Flipcards (Right Side on Desktop) -->
-      <div class="lg:col-span-5">
-        <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals</h2>
-        <div class="grid grid-cols-1 gap-6" id="riskMatrixContainer"></div>
-      </div>
-
-    </div>
-
-    <!-- Project Team -->
+    <!-- 5. Full-Width Legal & NOC Section -->
     <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-4">The Project Team</h2>
+      <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals Matrix</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="riskMatrixContainer"></div>
+    </div>
+
+    <!-- 6. The Project Team -->
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">The Project Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
     </div>
 
