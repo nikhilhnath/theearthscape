@@ -70,9 +70,22 @@
       </div>
     </div>
 
-    <!-- 2. Construction Progress (Sub & Super Structure) -->
+    <!-- 2. Full-Width Horizontal Construction Timeline -->
     <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Construction Progress</h2>
+      <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2">Construction Timeline</h2>
+      <p class="text-sm text-slate-500 mb-4 ml-2">Swipe horizontally to view high-level project milestones.</p>
+      
+      <div class="overflow-x-auto pb-4 hide-scrollbar -mx-4 px-4 md:-mx-0 md:px-0">
+        <div class="relative pt-4 min-w-max">
+          <div class="absolute top-[26px] left-36 right-36 h-1 bg-slate-200 z-0"></div>
+          <div class="flex gap-6 relative z-10" id="constructionContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Construction Progress (Sub & Super Structure) -->
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-4">Construction Progress</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
           <h3 class="font-bold text-slate-800 text-lg mb-6 border-b border-slate-100 pb-2 flex justify-between">
@@ -91,19 +104,17 @@
       </div>
     </div>
 
-    <!-- 3. Tower Elevation (All 6 Wings with Inventory) -->
+    <!-- 4. Tower Elevation (All 6 Wings with Inventory) -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2 mt-4">Tower Elevation & Inventory</h2>
       <p class="text-sm text-slate-500 mb-4 ml-2">Floor-by-floor structural completion and booking status per Wing.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="towerContainer"></div>
     </div>
 
-    <!-- 4. Time-Series Charts & Financial Cost -->
+    <!-- 5. Time-Series Charts & Financial Cost -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-4">Financial Health & Sales Velocity</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        
-        <!-- Escrow Chart -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
           <h2 class="text-xl font-bold text-slate-800">Escrow Account Utilization</h2>
           <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
@@ -116,7 +127,6 @@
           </div>
         </div>
 
-        <!-- Sales Chart -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col overflow-hidden">
           <h2 class="text-xl font-bold text-slate-800">Sales Velocity & Inventory</h2>
           <p class="text-sm text-slate-500 mt-1 mb-4 leading-relaxed">
@@ -155,7 +165,7 @@
       </div>
     </div>
 
-    <!-- 5. Inventory Encumbrance Bar -->
+    <!-- 6. Inventory Encumbrance Bar -->
     <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
       <div class="flex flex-col md:flex-row md:items-start justify-between mb-6 gap-4">
         <div class="max-w-3xl">
@@ -179,13 +189,13 @@
       </div>
     </div>
 
-    <!-- 6. Legal & NOC Section -->
+    <!-- 7. Legal & NOC Section -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals Matrix</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="riskMatrixContainer"></div>
     </div>
 
-    <!-- 7. Amenities & Common Areas -->
+    <!-- 8. Amenities & Common Areas -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Infrastructure & Amenities</h2>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -200,7 +210,7 @@
       </div>
     </div>
 
-    <!-- 8. The Project Team -->
+    <!-- 9. The Project Team -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-8">The Project Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
