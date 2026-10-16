@@ -19,7 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   
   <style>
-    /* CSS for the sleek 3D Flip Cards */
+    /* 3D Flip Card CSS */
     .perspective { perspective: 1000px; }
     .preserve-3d { transform-style: preserve-3d; }
     .backface-hidden { backface-visibility: hidden; }
@@ -27,7 +27,7 @@
     @media (hover: hover) { .flip-card:hover .flip-card-inner { transform: rotateY(180deg); } }
     .flipped { transform: rotateY(180deg); }
     
-    /* Scrollbar hiding for a cleaner look on mobile timelines */
+    /* Scrollbar hiding for horizontal swiping */
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -36,17 +36,27 @@
 
   <div class="max-w-6xl mx-auto space-y-10">
     
-    <!-- 1. Header with Overall Progress Donut -->
+    <!-- 1. Header with Dates & Overall Progress -->
     <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800" id="projectName">Loading...</h1>
           <span class="text-lg text-slate-600 font-medium font-serif italic block mt-1" id="projectSubtitle"></span>
           <p class="text-slate-500 text-sm mt-2" id="projectDetails"></p>
+          
+          <!-- RERA Validity & Target Handover Pills -->
+          <div class="flex flex-wrap items-center gap-3 mt-4">
+            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1.5 rounded-md text-xs font-bold shadow-sm">
+              <span class="text-emerald-500 mr-1">🎯</span> Target Handover: <span id="handoverDate"></span>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 text-amber-800 px-3 py-1.5 rounded-md text-xs font-bold shadow-sm">
+              <span class="text-amber-500 mr-1">⏱️</span> RERA Validity: <span id="validityDate"></span>
+            </div>
+          </div>
         </div>
 
         <div class="flex items-center gap-6">
-          <div class="bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-lg text-center shrink-0">
+          <div class="bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-lg text-center shrink-0 hidden sm:block">
             <p class="text-xs text-indigo-500 font-bold uppercase tracking-wider">Latest RERA Filing</p>
             <p class="text-lg font-black text-indigo-900" id="updateBadge"></p>
           </div>
@@ -65,14 +75,14 @@
     <!-- 2. Full-Width Horizontal Construction Timeline -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2">Construction Timeline</h2>
-      <p class="text-sm text-slate-500 mb-4 ml-2">Swipe horizontally to view physical progress and schedule status.</p>
+      <p class="text-sm text-slate-500 mb-4 ml-2">Swipe horizontally to view physical progress and schedule variances.</p>
       
       <div class="overflow-x-auto pb-4 hide-scrollbar -mx-4 px-4 md:-mx-0 md:px-0">
         <div class="relative pt-4 min-w-max">
-          <!-- The continuous horizontal line that connects the nodes -->
-          <div class="absolute top-[28px] left-10 right-10 h-1 bg-slate-200 z-0"></div>
+          <!-- Continuous horizontal line -->
+          <div class="absolute top-[26px] left-36 right-36 h-1 bg-slate-200 z-0"></div>
           
-          <!-- The container where JS injects the timeline cards -->
+          <!-- JS injects timeline cards here -->
           <div class="flex gap-6 relative z-10" id="constructionContainer"></div>
         </div>
       </div>
@@ -129,13 +139,21 @@
       </div>
     </div>
 
-    <!-- 5. Full-Width Legal & NOC Section -->
+    <!-- 5. Legal & NOC Section (Sorted) -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals Matrix</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="riskMatrixContainer"></div>
     </div>
 
-    <!-- 6. The Project Team -->
+    <!-- 6. Shared Amenities Progress -->
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Amenities & Common Infrastructure</h2>
+      <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6" id="amenitiesContainer"></div>
+      </div>
+    </div>
+
+    <!-- 7. The Project Team -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">The Project Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
