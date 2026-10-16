@@ -1,23 +1,89 @@
 {
   "projectMeta": {
-    "name": "The Earthscape Phase-1",
+    "name": "The Earthscape",
+    "subtitle": "By bricks & milestones",
     "location": "Bengaluru East Taluk, Gunjur",
     "reraNumber": "PRM/KA/RERA/1251/446/PR/020925/008044",
     "updated": "Q3 2026"
   },
-  "escrow": {
-    "collected": 155000000,
-    "withdrawn": 85000000,
-    "balance": 70000000
-  },
-  "sales": {
-    "booked": 275,
-    "unsold": 373
-  },
+  "timeSeries": [
+    {
+      "quarter": "Q1 2026",
+      "sales": { "booked": 110, "unsold": 538 },
+      "escrow": { "collected": 45000000, "withdrawn": 15000000, "balance": 30000000 }
+    },
+    {
+      "quarter": "Q2 2026",
+      "sales": { "booked": 195, "unsold": 453 },
+      "escrow": { "collected": 95000000, "withdrawn": 45000000, "balance": 50000000 }
+    },
+    {
+      "quarter": "Q3 2026",
+      "sales": { "booked": 275, "unsold": 373 },
+      "escrow": { "collected": 155000000, "withdrawn": 85000000, "balance": 70000000 }
+    }
+  ],
+  "constructionMilestones": [
+    {
+      "title": "Excavation",
+      "status": "100% Complete",
+      "frontDesc": "Site digging and earthwork across the 22-acre parcel.",
+      "backDesc": "Context: All earthwork for Phase 1 is fully completed. Soil testing and retaining wall preparations have concluded as per the official RERA filing. Site is cleared for deep foundation work."
+    },
+    {
+      "title": "Foundation & Footing",
+      "status": "85% Complete",
+      "frontDesc": "Raft foundation and structural footing execution.",
+      "backDesc": "Context: Sub-structure works are progressing rapidly. Tower A and B foundations are complete and cured, with Tower C currently underway. Estimated 100% completion by the next quarterly filing."
+    },
+    {
+      "title": "Slab Casting",
+      "status": "30% Complete",
+      "frontDesc": "Floor-by-floor concrete structure and columns.",
+      "backDesc": "Context: Ground and first-floor slabs have been cast for Wings A and B. Shuttering and steel reinforcement work is actively ongoing for the 2nd-floor slabs across active towers."
+    }
+  ],
   "legalRiskMatrix": [
-    { "title": "BWSSB", "status": "Pending", "desc": "₹2.75 Cr infra charge pending." },
-    { "title": "KSPCB", "status": "In Progress", "desc": "Working to vacate stop-work order on Sy No. 63/6." },
-    { "title": "KPTCL", "status": "Pending", "desc": "Underground shifting of adjacent HT lines pending." },
-    { "title": "Title Rectification", "status": "Cleared", "desc": "Title traces verified for Wing A." }
+    { 
+      "title": "BWSSB Clearance", 
+      "status": "Pending", 
+      "frontDesc": "₹2.75 Cr infrastructure charge for Cauvery water.",
+      "backDesc": "Context: BWSSB requires a ₹2.75 Cr fee for the main Cauvery pipeline connection. \n\nRisk Impact: Pending payment does not stall physical construction but is a mandatory prerequisite for the final Occupancy Certificate (OC) and actual water supply."
+    },
+    { 
+      "title": "KSPCB Order", 
+      "status": "In Progress", 
+      "frontDesc": "Vacation of stop-work order on Sy No. 63/6.",
+      "backDesc": "Context: The environmental board issued a localized stop-work order regarding buffer zone compliance specifically on Survey No. 63/6. \n\nRisk Impact: Currently being contested by the developer; construction on other survey numbers is proceeding normally."
+    },
+    { 
+      "title": "KPTCL Corridor", 
+      "status": "Pending", 
+      "frontDesc": "Underground shifting of adjacent HT power lines.",
+      "backDesc": "Context: High-Tension (HT) lines need shifting for safety corridor clearance. \n\nRisk Impact: The developer has submitted the application and initial fee; currently awaiting the KPTCL execution schedule to commence the underground routing."
+    },
+    { 
+      "title": "Title Rectification", 
+      "status": "Cleared", 
+      "frontDesc": "Tracing full titles across all 6 survey numbers.",
+      "backDesc": "Context: RERA initially registered only Sy No. 63/2. \n\nResolution: The title trace has now been legally rectified and updated on the RERA portal to include all constituent Wing A parcels (63/2, 62/5, 63/4, 63/5, 62/4, 63/3)."
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80",
+      "caption": "Wing A Foundation Status",
+      "date": "Sep 2026"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80",
+      "caption": "Excavation for Wing B",
+      "date": "Aug 2026"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&w=600&q=80",
+      "caption": "Material Staging Area",
+      "date": "Jul 2026"
+    }
   ]
 }
