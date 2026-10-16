@@ -1,0 +1,23 @@
+{
+  "projectMeta": {
+    "name": "The Earthscape Phase-1",
+    "location": "Bengaluru East Taluk, Gunjur",
+    "reraNumber": "PRM/KA/RERA/1251/446/PR/020925/008044",
+    "updated": "Q3 2026"
+  },
+  "escrow": {
+    "collected": 155000000,
+    "withdrawn": 85000000,
+    "balance": 70000000
+  },
+  "sales": {
+    "booked": 275,
+    "unsold": 373
+  },
+  "legalRiskMatrix": [
+    { "title": "BWSSB", "status": "Pending", "desc": "₹2.75 Cr infra charge pending." },
+    { "title": "KSPCB", "status": "In Progress", "desc": "Working to vacate stop-work order on Sy No. 63/6." },
+    { "title": "KPTCL", "status": "Pending", "desc": "Underground shifting of adjacent HT lines pending." },
+    { "title": "Title Rectification", "status": "Cleared", "desc": "Title traces verified for Wing A." }
+  ]
+}
