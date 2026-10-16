@@ -72,7 +72,7 @@ try {
         options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6 }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } } }
       });
 
-      // 5. Encumbrance Bar Animation
+      // 5. Encumbrance Bar
       const total = data.inventoryMeta.totalUnits;
       const mortgaged = data.inventoryMeta.mortgaged;
       const unencumbered = data.inventoryMeta.unencumbered;
@@ -85,7 +85,7 @@ try {
         document.getElementById('unencumberedText').textContent = `${unencumbered} Units`;
       }, 300);
 
-      // 6. Component Generators
+      // 6. UI Generators
       const generateTimelineCard = (item) => {
         let statusColor = item.status.includes('100%') ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-amber-100 text-amber-800 border-amber-200';
         let dotColor = item.status.includes('100%') ? 'border-emerald-500 bg-white' : 'border-indigo-500 bg-white';
@@ -99,6 +99,7 @@ try {
           <div class="relative w-72 md:w-80 shrink-0 flex flex-col items-center">
             <div class="w-6 h-6 rounded-full border-4 shadow-sm z-20 bg-white ${dotColor}"></div>
             <div class="w-1 h-6 bg-slate-200 z-10"></div>
+            
             <div class="flip-card perspective h-52 w-full cursor-pointer">
               <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
                 <div class="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
@@ -156,11 +157,27 @@ try {
         `;
       };
 
+      const generateProgressBar = (item) => {
+        let barColor = item.progress === 100 ? 'bg-emerald-500' : (item.progress > 0 ? 'bg-indigo-500' : 'bg-slate-200');
+        let labelColor = item.progress === 100 ? 'text-emerald-700' : 'text-slate-700';
+        return `
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <span class="font-bold ${labelColor} text-[13px]">${item.name}</span>
+              <span class="text-xs font-black text-slate-400">${item.progress}%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner">
+              <div class="${barColor} h-2 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-target="${item.progress}%"></div>
+            </div>
+          </div>
+        `;
+      }
+
       // 7. Inject Construction Timeline
       const buildContainer = document.getElementById('constructionContainer');
       data.constructionMilestones.forEach(item => { buildContainer.innerHTML += generateTimelineCard(item); });
 
-      // 8. Inject Tower Elevation (Wing by Wing)
+      // 8. Inject Tower Elevation
       const towerContainer = document.getElementById('towerContainer');
       data.towerProgress.forEach(tower => {
         let floorsHTML = '';
@@ -190,13 +207,6 @@ try {
         `;
       });
 
-      // Animate Tower Elevation Bars
-      setTimeout(() => {
-        document.querySelectorAll('#towerContainer [data-target]').forEach(bar => {
-          bar.style.width = bar.getAttribute('data-target');
-        });
-      }, 500);
-
       // 9. Sort and Inject Legal Risk Matrix
       const riskContainer = document.getElementById('riskMatrixContainer');
       data.legalRiskMatrix.sort((a, b) => {
@@ -208,26 +218,16 @@ try {
         riskContainer.innerHTML += generateLegalCard(item.title, item.status, item.frontDesc, item.backDesc); 
       });
 
-      // 10. Inject Amenities Progress
+      // 10. Inject Amenities & Common Areas Progress
       const amenitiesContainer = document.getElementById('amenitiesContainer');
-      data.amenitiesProgress.forEach(am => {
-        let barColor = am.progress === 100 ? 'bg-emerald-500' : 'bg-indigo-500';
-        amenitiesContainer.innerHTML += `
-          <div>
-            <div class="flex justify-between items-end mb-2">
-              <span class="font-bold text-slate-700 text-sm">${am.name}</span>
-              <span class="text-xs font-bold text-slate-500">${am.progress}%</span>
-            </div>
-            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden shadow-inner">
-              <div class="${barColor} h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-target="${am.progress}%"></div>
-            </div>
-          </div>
-        `;
-      });
-      
-      // Animate amenity bars
+      data.amenitiesProgress.forEach(am => { amenitiesContainer.innerHTML += generateProgressBar(am); });
+
+      const commonAreasContainer = document.getElementById('commonAreasContainer');
+      data.commonAreasProgress.forEach(ca => { commonAreasContainer.innerHTML += generateProgressBar(ca); });
+
+      // Trigger all progress bar animations
       setTimeout(() => {
-        document.querySelectorAll('#amenitiesContainer [data-target]').forEach(bar => {
+        document.querySelectorAll('[data-target]').forEach(bar => {
           bar.style.width = bar.getAttribute('data-target');
         });
       }, 400);
