@@ -39,24 +39,31 @@ fetch('data.json')
       data: {
         labels: quarters,
         datasets: [
-          { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' },
-          { type: 'bar', label: 'Total Collected', data: collected, backgroundColor: '#3b82f6', borderRadius: 4 },
-          { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4 }
+          { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff' },
+          { type: 'bar', label: 'Total Collected', data: collected, backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.7 },
+          { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4, barPercentage: 0.7 }
         ]
       },
       options: { 
         responsive: true, 
         maintainAspectRatio: false, 
         interaction: { mode: 'index', intersect: false },
-        layout: { padding: { top: 20 } }, // Give room for labels at the top
+        layout: { padding: { top: 20, right: 20 } }, 
         plugins: {
+          legend: {
+            position: 'bottom', // Moves legend to the bottom
+            labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 }
+          },
           tooltip: {
-            callbacks: {
-              label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); }
-            }
+            backgroundColor: 'rgba(15, 23, 42, 0.95)', // Sleeker, darker tooltip
+            titleFont: { size: 13 },
+            bodyFont: { size: 12 },
+            padding: 12,
+            cornerRadius: 8,
+            boxPadding: 6,
+            callbacks: { label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); } }
           },
           datalabels: {
-            // Only display labels for the line chart to keep it clean
             display: function(context) { return context.dataset.type === 'line'; },
             align: 'top',
             anchor: 'bottom',
@@ -69,7 +76,11 @@ fetch('data.json')
           }
         },
         scales: {
-          y: { ticks: { callback: function(value) { return formatINR(value); } } }
+          x: { grid: { display: false } }, // Removes cluttered vertical lines
+          y: { 
+            border: { display: false }, // Removes solid axis line
+            ticks: { maxTicksLimit: 6, callback: function(value) { return formatINR(value); } } // Shows fewer labels to save space
+          }
         }
       }
     });
@@ -80,18 +91,29 @@ fetch('data.json')
       data: {
         labels: quarters,
         datasets: [
-          { type: 'line', label: 'Unsold Inventory', data: unsold, borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 3, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' },
-          { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4 }
+          { type: 'line', label: 'Unsold Inventory', data: unsold, borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 3, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff' },
+          { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4, barPercentage: 0.5 }
         ]
       },
       options: { 
         responsive: true, 
         maintainAspectRatio: false, 
         interaction: { mode: 'index', intersect: false },
-        layout: { padding: { top: 20 } }, // Give room for labels at the top
+        layout: { padding: { top: 20, right: 20 } }, 
         plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+            titleFont: { size: 13 },
+            bodyFont: { size: 12 },
+            padding: 12,
+            cornerRadius: 8,
+            boxPadding: 6
+          },
           datalabels: {
-            // Only display labels for the Unsold Inventory line
             display: function(context) { return context.dataset.type === 'line'; },
             align: 'top',
             anchor: 'bottom',
@@ -101,6 +123,10 @@ fetch('data.json')
             font: { weight: 'bold', size: 10 },
             padding: { x: 6, y: 4 }
           }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { border: { display: false }, ticks: { maxTicksLimit: 6 } }
         }
       }
     });
