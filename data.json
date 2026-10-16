@@ -4,7 +4,13 @@
     "subtitle": "By bricks & milestones",
     "location": "Bengaluru East Taluk, Gunjur",
     "reraNumber": "PRM/KA/RERA/1251/446/PR/020925/008044",
-    "updated": "Q3 2026"
+    "updated": "Q3 2026",
+    "overallProgress": 26
+  },
+  "inventoryMeta": {
+    "totalUnits": 648,
+    "mortgaged": 120,
+    "unencumbered": 528
   },
   "timeSeries": [
     {
@@ -32,20 +38,23 @@
     {
       "title": "Excavation",
       "status": "100% Complete",
+      "variance": "Completed",
       "frontDesc": "Site digging and earthwork across the 22-acre parcel.",
-      "backDesc": "Context: All earthwork for Phase 1 is fully completed. Soil testing and retaining wall preparations have concluded as per the official RERA filing. Site is cleared for deep foundation work."
+      "backDesc": "Context: All earthwork for Phase 1 is fully completed. Soil testing and retaining wall preparations have concluded as per the official RERA filing. Site is cleared for deep foundation work.\n\nTarget: Jan 2026 | Actual: Jan 2026"
     },
     {
       "title": "Foundation & Footing",
       "status": "85% Complete",
+      "variance": "Ahead of Schedule",
       "frontDesc": "Raft foundation and structural footing execution.",
-      "backDesc": "Context: Sub-structure works are progressing rapidly. Tower A and B foundations are complete and cured, with Tower C currently underway. Estimated 100% completion by the next quarterly filing."
+      "backDesc": "Context: Sub-structure works are progressing rapidly. Tower A and B foundations are complete and cured, with Tower C currently underway.\n\nTarget: Dec 2026 | Expected: Nov 2026"
     },
     {
       "title": "Slab Casting",
       "status": "30% Complete",
+      "variance": "On Track",
       "frontDesc": "Floor-by-floor concrete structure and columns.",
-      "backDesc": "Context: Ground and first-floor slabs have been cast for Wings A and B. Shuttering and steel reinforcement work is actively ongoing for the 2nd-floor slabs across active towers."
+      "backDesc": "Context: Ground and first-floor slabs have been cast for Wings A and B. Shuttering and steel reinforcement work is actively ongoing for the 2nd-floor slabs.\n\nTarget: Oct 2026 | Expected: Oct 2026"
     }
   ],
   "legalRiskMatrix": [
@@ -73,5 +82,10 @@
       "frontDesc": "Tracing full titles across all 6 survey numbers.",
       "backDesc": "Context: RERA initially registered only Sy No. 63/2. \n\nResolution: The title trace has now been legally rectified and updated on the RERA portal to include all constituent Wing A parcels (63/2, 62/5, 63/4, 63/5, 62/4, 63/3)."
     }
+  ],
+  "projectTeam": [
+    { "role": "Principal Architect", "name": "Venkatraman Associates", "detail": "Leading the structural and aesthetic design." },
+    { "role": "Structural Engineer", "name": "Innotech Engineering", "detail": "Responsible for foundation and tower stability." },
+    { "role": "Main Contractor", "name": "Earthscape Buildcon", "detail": "Executing the physical on-site construction." }
   ]
 }
