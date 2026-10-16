@@ -135,30 +135,14 @@ try {
         card.addEventListener('click', () => { card.querySelector('.flip-card-inner').classList.toggle('flipped'); });
       });
 
-      // 8. Photo Timeline
-      const gallery = document.getElementById('photoGalleryContainer');
-      data.photos.forEach(photo => {
-        gallery.innerHTML += `
-          <div class="group relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm cursor-pointer">
-            <img src="${photo.url}" alt="${photo.caption}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent p-4 pt-12">
-              <p class="text-white font-bold text-sm tracking-wide">${photo.caption}</p>
-              <p class="text-slate-300 text-xs mt-1 font-medium">${photo.date}</p>
-            </div>
-          </div>
-        `;
-      });
-
     })
     .catch(error => {
-      // THIS CATCHES JSON OR DATA ERRORS
       document.getElementById('projectName').textContent = "⚠️ Data Loading Error";
       document.getElementById('projectDetails').textContent = "Check if data.json is properly formatted. Error: " + error.message;
       console.error(error);
     });
 
 } catch (error) {
-  // THIS CATCHES JAVASCRIPT TYPOS
   document.getElementById('projectName').textContent = "⚠️ Script Error";
   document.getElementById('projectDetails').textContent = "There is a typo in app.js. Error: " + error.message;
   console.error(error);
