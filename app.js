@@ -8,11 +8,13 @@ try {
     })
     .then(data => {
       
-      // 1. Header Data & Overall Progress
+      // 1. Header Data & Dates
       document.getElementById('projectName').textContent = data.projectMeta.name;
       document.getElementById('projectSubtitle').textContent = data.projectMeta.subtitle;
       document.getElementById('projectDetails').textContent = `${data.projectMeta.location} | RERA ID: ${data.projectMeta.reraNumber}`;
       document.getElementById('updateBadge').textContent = data.projectMeta.updated;
+      document.getElementById('handoverDate').textContent = data.projectMeta.targetHandover;
+      document.getElementById('validityDate').textContent = data.projectMeta.reraValidity;
       document.getElementById('overallPercentText').textContent = `${data.projectMeta.overallProgress}%`;
 
       new Chart(document.getElementById('overallProgressChart').getContext('2d'), {
@@ -24,7 +26,7 @@ try {
         options: { cutout: '75%', plugins: { tooltip: { enabled: false }, legend: { display: false }, datalabels: { display: false } }, responsive: true, maintainAspectRatio: false }
       });
 
-      // 2. Setup Chart Data Arrays
+      // 2. Formatters & Chart Arrays
       const quarters = data.timeSeries.map(q => q.quarter);
       const collected = data.timeSeries.map(q => q.escrow.collected);
       const withdrawn = data.timeSeries.map(q => q.escrow.withdrawn);
@@ -37,7 +39,6 @@ try {
         if (value >= 100000) return '₹' + (value / 100000).toFixed(2) + ' L';
         return '₹' + value.toLocaleString('en-IN');
       };
-
       const formatShortINR = (value) => {
         if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
         if (value >= 100000) return (value / 100000).toFixed(1) + ' L';
@@ -55,15 +56,7 @@ try {
             { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4, barPercentage: 0.7 }
           ]
         },
-        options: { 
-          responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, 
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } },
-            tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6, callbacks: { label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); } } },
-            datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#10b981', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 }, formatter: function(value) { return formatShortINR(value); } }
-          },
-          scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6, callback: function(value) { return formatINR(value); } } } }
-        }
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6, callbacks: { label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); } } }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#10b981', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 }, formatter: function(value) { return formatShortINR(value); } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6, callback: function(value) { return formatINR(value); } } } } }
       });
 
       // 4. Sales Chart
@@ -76,25 +69,15 @@ try {
             { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4, barPercentage: 0.5 }
           ]
         },
-        options: { 
-          responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, 
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } },
-            tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6 },
-            datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 } }
-          },
-          scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } }
-        }
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6 }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } } }
       });
 
-      // 5. Encumbrance Bar Animation
+      // 5. Encumbrance Bar
       const total = data.inventoryMeta.totalUnits;
       const mortgaged = data.inventoryMeta.mortgaged;
       const unencumbered = data.inventoryMeta.unencumbered;
       const mortPercent = (mortgaged / total) * 100;
-      
       document.getElementById('totalUnitsText').textContent = total;
-      
       setTimeout(() => {
         const mortBar = document.getElementById('mortgageBar');
         mortBar.style.width = `${mortPercent}%`;
@@ -102,42 +85,10 @@ try {
         document.getElementById('unencumberedText').textContent = `${unencumbered} Units`;
       }, 300);
 
-      // 6. UI Generators (Shrunk cards to h-52)
-      const generateLegalCard = (title, status, frontDesc, backDesc) => {
-        let colorClass = 'bg-slate-100 text-slate-700';
-        if (status === 'Cleared') colorClass = 'bg-emerald-100 text-emerald-800';
-        else if (status.includes('Progress')) colorClass = 'bg-amber-100 text-amber-800';
-        else if (status === 'Pending') colorClass = 'bg-rose-100 text-rose-800';
-
-        return `
-          <div class="flip-card perspective h-52 w-full cursor-pointer">
-            <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
-              <div class="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
-                <div>
-                  <div class="flex justify-between items-start mb-2">
-                    <h3 class="font-bold text-slate-800 text-base leading-tight pr-1">${title}</h3>
-                    <span class="px-2 py-0.5 text-[10px] font-bold rounded border whitespace-nowrap ${colorClass}">${status}</span>
-                  </div>
-                  <p class="text-slate-600 text-sm font-medium line-clamp-3">${frontDesc}</p>
-                </div>
-                <div class="text-[11px] text-indigo-500 font-bold flex items-center gap-1">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                  Tap for details
-                </div>
-              </div>
-              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto flex flex-col justify-start pt-5">
-                <h3 class="font-bold text-indigo-300 text-sm mb-2 border-b border-slate-600 pb-2">${title}</h3>
-                <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-line">${backDesc}</p>
-              </div>
-            </div>
-          </div>
-        `;
-      };
-
+      // 6. UI Generators
       const generateTimelineCard = (item) => {
         let statusColor = item.status.includes('100%') ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-amber-100 text-amber-800 border-amber-200';
         let dotColor = item.status.includes('100%') ? 'border-emerald-500 bg-white' : 'border-indigo-500 bg-white';
-        
         let varColor = 'text-slate-500';
         if(item.variance === 'Completed') varColor = 'text-emerald-700 bg-emerald-50 border-emerald-200';
         if(item.variance === 'Ahead of Schedule') varColor = 'text-blue-700 bg-blue-50 border-blue-200';
@@ -147,7 +98,9 @@ try {
         return `
           <div class="relative w-72 md:w-80 shrink-0 flex flex-col items-center">
             <!-- Timeline Dot -->
-            <div class="w-6 h-6 rounded-full border-4 shadow-sm z-10 mb-4 ${dotColor}"></div>
+            <div class="w-6 h-6 rounded-full border-4 shadow-sm z-20 bg-white ${dotColor}"></div>
+            <!-- Vertical Drop-Down Line linking dot to card -->
+            <div class="w-1 h-6 bg-slate-200 z-10"></div>
             
             <div class="flip-card perspective h-52 w-full cursor-pointer">
               <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
@@ -175,13 +128,76 @@ try {
         `;
       };
 
-      // 7. Inject UI Elements
+      const generateLegalCard = (title, status, frontDesc, backDesc) => {
+        let colorClass = 'bg-slate-100 text-slate-700';
+        if (status === 'Cleared') colorClass = 'bg-emerald-100 text-emerald-800 border-emerald-200';
+        else if (status.includes('Progress')) colorClass = 'bg-amber-100 text-amber-800 border-amber-200';
+        else if (status === 'Pending') colorClass = 'bg-rose-100 text-rose-800 border-rose-200';
+
+        return `
+          <div class="flip-card perspective h-52 w-full cursor-pointer">
+            <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+              <div class="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-slate-800 text-base leading-tight pr-1">${title}</h3>
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded border whitespace-nowrap ${colorClass}">${status}</span>
+                  </div>
+                  <p class="text-slate-600 text-sm font-medium line-clamp-3">${frontDesc}</p>
+                </div>
+                <div class="text-[11px] text-indigo-500 font-bold flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                  Tap for details
+                </div>
+              </div>
+              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto flex flex-col justify-start pt-5">
+                <h3 class="font-bold text-indigo-300 text-sm mb-2 border-b border-slate-600 pb-2">${title}</h3>
+                <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-line">${backDesc}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      // 7. Inject Construction Timeline
       const buildContainer = document.getElementById('constructionContainer');
       data.constructionMilestones.forEach(item => { buildContainer.innerHTML += generateTimelineCard(item); });
 
+      // 8. Sort and Inject Legal Risk Matrix (Litigation First, then Cleared -> Progress -> Pending)
       const riskContainer = document.getElementById('riskMatrixContainer');
-      data.legalRiskMatrix.forEach(item => { riskContainer.innerHTML += generateLegalCard(item.title, item.status, item.frontDesc, item.backDesc); });
+      data.legalRiskMatrix.sort((a, b) => {
+        if (a.title.includes("Litigation")) return -1;
+        if (b.title.includes("Litigation")) return 1;
+        const weights = { "Cleared": 1, "In Progress": 2, "Pending": 3 };
+        return weights[a.status] - weights[b.status];
+      }).forEach(item => { 
+        riskContainer.innerHTML += generateLegalCard(item.title, item.status, item.frontDesc, item.backDesc); 
+      });
 
+      // 9. Inject Amenities Progress
+      const amenitiesContainer = document.getElementById('amenitiesContainer');
+      data.amenitiesProgress.forEach(am => {
+        let barColor = am.progress === 100 ? 'bg-emerald-500' : 'bg-indigo-500';
+        amenitiesContainer.innerHTML += `
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <span class="font-bold text-slate-700 text-sm">${am.name}</span>
+              <span class="text-xs font-bold text-slate-500">${am.progress}%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+              <div class="${barColor} h-2.5 rounded-full transition-all duration-1000" style="width: 0%" data-target="${am.progress}%"></div>
+            </div>
+          </div>
+        `;
+      });
+      // Animate amenity bars
+      setTimeout(() => {
+        document.querySelectorAll('#amenitiesContainer > div > div > div').forEach(bar => {
+          bar.style.width = bar.getAttribute('data-target');
+        });
+      }, 400);
+
+      // 10. Inject Project Team
       const teamContainer = document.getElementById('projectTeamContainer');
       data.projectTeam.forEach(member => {
         teamContainer.innerHTML += `
@@ -193,7 +209,7 @@ try {
         `;
       });
 
-      // 8. Attach Mobile Tap Listeners
+      // 11. Attach Mobile Tap Listeners
       document.querySelectorAll('.flip-card').forEach(card => {
         card.addEventListener('click', () => { card.querySelector('.flip-card-inner').classList.toggle('flipped'); });
       });
