@@ -1,3 +1,6 @@
+// Register the DataLabels plugin
+Chart.register(ChartDataLabels);
+
 fetch('data.json')
   .then(response => response.json())
   .then(data => {
@@ -16,20 +19,27 @@ fetch('data.json')
     const booked = data.timeSeries.map(q => q.sales.booked);
     const unsold = data.timeSeries.map(q => q.sales.unsold);
 
-    // HELPER: Convert raw numbers to Indian formats (Crores & Lakhs)
+    // HELPER: Convert raw numbers to Indian formats for Tooltips (e.g. ₹1.50 Cr)
     const formatINR = (value) => {
       if (value >= 10000000) return '₹' + (value / 10000000).toFixed(2) + ' Cr';
       if (value >= 100000) return '₹' + (value / 100000).toFixed(2) + ' L';
       return '₹' + value.toLocaleString('en-IN');
     };
 
-    // 3. Escrow Combo Chart (Includes INR Tooltips & Y-Axis formatting)
+    // HELPER: Convert raw numbers to clean, short formats for the Line Labels (e.g. 1.5 Cr)
+    const formatShortINR = (value) => {
+      if (value >= 10000000) return (value / 10000000).toFixed(1) + ' Cr';
+      if (value >= 100000) return (value / 100000).toFixed(1) + ' L';
+      return value.toLocaleString('en-IN');
+    };
+
+    // 3. Escrow Combo Chart
     new Chart(document.getElementById('escrowChart').getContext('2d'), {
       type: 'bar',
       data: {
         labels: quarters,
         datasets: [
-          { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3 },
+          { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' },
           { type: 'bar', label: 'Total Collected', data: collected, backgroundColor: '#3b82f6', borderRadius: 4 },
           { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4 }
         ]
@@ -38,41 +48,60 @@ fetch('data.json')
         responsive: true, 
         maintainAspectRatio: false, 
         interaction: { mode: 'index', intersect: false },
+        layout: { padding: { top: 20 } }, // Give room for labels at the top
         plugins: {
           tooltip: {
             callbacks: {
-              label: function(context) {
-                return context.dataset.label + ': ' + formatINR(context.raw);
-              }
+              label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); }
             }
+          },
+          datalabels: {
+            // Only display labels for the line chart to keep it clean
+            display: function(context) { return context.dataset.type === 'line'; },
+            align: 'top',
+            anchor: 'bottom',
+            backgroundColor: '#10b981',
+            borderRadius: 4,
+            color: 'white',
+            font: { weight: 'bold', size: 10 },
+            padding: { x: 6, y: 4 },
+            formatter: function(value) { return formatShortINR(value); }
           }
         },
         scales: {
-          y: {
-            ticks: {
-              callback: function(value) {
-                return formatINR(value);
-              }
-            }
-          }
+          y: { ticks: { callback: function(value) { return formatINR(value); } } }
         }
       }
     });
 
-    // 4. Sales Combo Chart (Unit count, no INR formatting needed)
+    // 4. Sales Combo Chart
     new Chart(document.getElementById('salesChart').getContext('2d'), {
       type: 'bar',
       data: {
         labels: quarters,
         datasets: [
-          { type: 'line', label: 'Unsold Inventory', data: unsold, borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 3, tension: 0.3 },
+          { type: 'line', label: 'Unsold Inventory', data: unsold, borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 3, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' },
           { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4 }
         ]
       },
       options: { 
         responsive: true, 
         maintainAspectRatio: false, 
-        interaction: { mode: 'index', intersect: false } 
+        interaction: { mode: 'index', intersect: false },
+        layout: { padding: { top: 20 } }, // Give room for labels at the top
+        plugins: {
+          datalabels: {
+            // Only display labels for the Unsold Inventory line
+            display: function(context) { return context.dataset.type === 'line'; },
+            align: 'top',
+            anchor: 'bottom',
+            backgroundColor: '#64748b',
+            borderRadius: 4,
+            color: 'white',
+            font: { weight: 'bold', size: 10 },
+            padding: { x: 6, y: 4 }
+          }
+        }
       }
     });
 
