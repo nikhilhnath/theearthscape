@@ -55,14 +55,14 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <h2 class="text-xl font-bold text-slate-800 mb-4">Escrow Account Utilization</h2>
-        <!-- FIX: Added a relative wrapper with a fixed height (h-64 on mobile, h-80 on desktop) -->
+        <!-- Wrapper forcing max height for mobile responsiveness -->
         <div class="relative h-64 md:h-80 w-full">
           <canvas id="escrowChart"></canvas>
         </div>
       </div>
       <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
         <h2 class="text-xl font-bold text-slate-800 mb-4">Sales Velocity & Inventory</h2>
-        <!-- FIX: Added a relative wrapper with a fixed height -->
+        <!-- Wrapper forcing max height for mobile responsiveness -->
         <div class="relative h-64 md:h-80 w-full">
           <canvas id="salesChart"></canvas>
         </div>
