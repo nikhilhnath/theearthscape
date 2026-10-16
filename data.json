@@ -8,6 +8,11 @@
   },
   "timeSeries": [
     {
+      "quarter": "Q4 2025",
+      "sales": { "booked": 45, "unsold": 603 },
+      "escrow": { "collected": 15000000, "withdrawn": 5000000, "balance": 10000000 }
+    },
+    {
       "quarter": "Q1 2026",
       "sales": { "booked": 110, "unsold": 538 },
       "escrow": { "collected": 45000000, "withdrawn": 15000000, "balance": 30000000 }
