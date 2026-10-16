@@ -26,7 +26,7 @@ try {
         options: { cutout: '75%', plugins: { tooltip: { enabled: false }, legend: { display: false }, datalabels: { display: false } }, responsive: true, maintainAspectRatio: false }
       });
 
-      // 2. Formatters & Chart Arrays
+      // 2. Chart Formatting Setup
       const quarters = data.timeSeries.map(q => q.quarter);
       const collected = data.timeSeries.map(q => q.escrow.collected);
       const withdrawn = data.timeSeries.map(q => q.escrow.withdrawn);
@@ -72,7 +72,7 @@ try {
         options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6 }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } } }
       });
 
-      // 5. Encumbrance Bar
+      // 5. Encumbrance Bar Animation
       const total = data.inventoryMeta.totalUnits;
       const mortgaged = data.inventoryMeta.mortgaged;
       const unencumbered = data.inventoryMeta.unencumbered;
@@ -85,7 +85,7 @@ try {
         document.getElementById('unencumberedText').textContent = `${unencumbered} Units`;
       }, 300);
 
-      // 6. UI Generators
+      // 6. Component Generators
       const generateTimelineCard = (item) => {
         let statusColor = item.status.includes('100%') ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-amber-100 text-amber-800 border-amber-200';
         let dotColor = item.status.includes('100%') ? 'border-emerald-500 bg-white' : 'border-indigo-500 bg-white';
@@ -97,11 +97,8 @@ try {
 
         return `
           <div class="relative w-72 md:w-80 shrink-0 flex flex-col items-center">
-            <!-- Timeline Dot -->
             <div class="w-6 h-6 rounded-full border-4 shadow-sm z-20 bg-white ${dotColor}"></div>
-            <!-- Vertical Drop-Down Line linking dot to card -->
             <div class="w-1 h-6 bg-slate-200 z-10"></div>
-            
             <div class="flip-card perspective h-52 w-full cursor-pointer">
               <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
                 <div class="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
@@ -150,7 +147,7 @@ try {
                   Tap for details
                 </div>
               </div>
-              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto flex flex-col justify-start pt-5">
+              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto thin-scrollbar flex flex-col justify-start pt-5 pr-2">
                 <h3 class="font-bold text-indigo-300 text-sm mb-2 border-b border-slate-600 pb-2">${title}</h3>
                 <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-line">${backDesc}</p>
               </div>
@@ -163,7 +160,44 @@ try {
       const buildContainer = document.getElementById('constructionContainer');
       data.constructionMilestones.forEach(item => { buildContainer.innerHTML += generateTimelineCard(item); });
 
-      // 8. Sort and Inject Legal Risk Matrix (Litigation First, then Cleared -> Progress -> Pending)
+      // 8. Inject Tower Elevation (Wing by Wing)
+      const towerContainer = document.getElementById('towerContainer');
+      data.towerProgress.forEach(tower => {
+        let floorsHTML = '';
+        tower.floors.forEach(floor => {
+          let barColor = floor.progress === 100 ? 'bg-emerald-500' : (floor.progress > 0 ? 'bg-indigo-500' : 'bg-slate-200');
+          let labelColor = floor.progress === 100 ? 'text-emerald-700' : 'text-slate-500';
+          floorsHTML += `
+            <div class="flex items-center gap-3 w-full">
+              <span class="w-16 text-xs font-bold ${labelColor} text-right shrink-0">${floor.name}</span>
+              <div class="flex-1 h-5 bg-slate-100 rounded overflow-hidden flex shadow-inner">
+                <div class="h-full ${barColor} transition-all duration-1000 ease-out" style="width: 0%" data-target="${floor.progress}%"></div>
+              </div>
+              <span class="w-8 text-[10px] font-black text-slate-400 shrink-0">${floor.progress}%</span>
+            </div>
+          `;
+        });
+        
+        towerContainer.innerHTML += `
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-80">
+            <h3 class="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-3 flex justify-between items-center">
+              ${tower.wing} <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Elevation</span>
+            </h3>
+            <div class="overflow-y-auto flex-1 thin-scrollbar flex flex-col gap-2.5 pr-2 w-full">
+              ${floorsHTML}
+            </div>
+          </div>
+        `;
+      });
+
+      // Animate Tower Elevation Bars
+      setTimeout(() => {
+        document.querySelectorAll('#towerContainer [data-target]').forEach(bar => {
+          bar.style.width = bar.getAttribute('data-target');
+        });
+      }, 500);
+
+      // 9. Sort and Inject Legal Risk Matrix
       const riskContainer = document.getElementById('riskMatrixContainer');
       data.legalRiskMatrix.sort((a, b) => {
         if (a.title.includes("Litigation")) return -1;
@@ -174,7 +208,7 @@ try {
         riskContainer.innerHTML += generateLegalCard(item.title, item.status, item.frontDesc, item.backDesc); 
       });
 
-      // 9. Inject Amenities Progress
+      // 10. Inject Amenities Progress
       const amenitiesContainer = document.getElementById('amenitiesContainer');
       data.amenitiesProgress.forEach(am => {
         let barColor = am.progress === 100 ? 'bg-emerald-500' : 'bg-indigo-500';
@@ -184,20 +218,21 @@ try {
               <span class="font-bold text-slate-700 text-sm">${am.name}</span>
               <span class="text-xs font-bold text-slate-500">${am.progress}%</span>
             </div>
-            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-              <div class="${barColor} h-2.5 rounded-full transition-all duration-1000" style="width: 0%" data-target="${am.progress}%"></div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden shadow-inner">
+              <div class="${barColor} h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-target="${am.progress}%"></div>
             </div>
           </div>
         `;
       });
+      
       // Animate amenity bars
       setTimeout(() => {
-        document.querySelectorAll('#amenitiesContainer > div > div > div').forEach(bar => {
+        document.querySelectorAll('#amenitiesContainer [data-target]').forEach(bar => {
           bar.style.width = bar.getAttribute('data-target');
         });
       }, 400);
 
-      // 10. Inject Project Team
+      // 11. Inject Project Team
       const teamContainer = document.getElementById('projectTeamContainer');
       data.projectTeam.forEach(member => {
         teamContainer.innerHTML += `
@@ -209,7 +244,7 @@ try {
         `;
       });
 
-      // 11. Attach Mobile Tap Listeners
+      // 12. Attach Mobile Tap Listeners
       document.querySelectorAll('.flip-card').forEach(card => {
         card.addEventListener('click', () => { card.querySelector('.flip-card-inner').classList.toggle('flipped'); });
       });
