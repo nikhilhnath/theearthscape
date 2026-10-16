@@ -40,6 +40,29 @@
     "estimatedCost": 5939267487,
     "actualCost": 1573200000
   },
+  "constructionMilestones": [
+    {
+      "title": "Excavation",
+      "status": "100% Complete",
+      "variance": "Completed",
+      "frontDesc": "Site digging and earthwork across the 22-acre parcel.",
+      "backDesc": "Context: All earthwork for Phase 1 is fully completed. Soil testing and retaining wall preparations have concluded as per the official RERA filing. Site is cleared for deep foundation work.\n\nTarget: Jan 2026 | Actual: Jan 2026"
+    },
+    {
+      "title": "Foundation & Footing",
+      "status": "100% Complete",
+      "variance": "Ahead of Schedule",
+      "frontDesc": "Raft foundation and structural footing execution.",
+      "backDesc": "Context: Sub-structure works are progressing rapidly. Tower foundations are complete and cured as per Q2 RERA updates.\n\nTarget: Dec 2026 | Actual: Oct 2026"
+    },
+    {
+      "title": "Slab Casting",
+      "status": "30% Complete",
+      "variance": "On Track",
+      "frontDesc": "Floor-by-floor concrete structure and columns.",
+      "backDesc": "Context: Super-structure works actively ongoing across multiple wings. Wing F leads with substantial floor progress.\n\nTarget: Oct 2026 | Expected: Oct 2026"
+    }
+  ],
   "subStructure": [
     { "name": "Earth work and other leveling", "progress": 95 },
     { "name": "Foundation footing work", "progress": 100 },
@@ -162,9 +185,9 @@
       "backDesc": "Status: AAI clearance obtained for maximum structural height."
     },
     { 
-      "title": "BSNL/Telecommunication", "status": "Cleared", 
+      "title": "Telecom", "status": "Cleared", 
       "frontDesc": "Approved on 12-11-2024.",
-      "backDesc": "Status: Official telecommunications infrastructure clearance obtained."
+      "backDesc": "Status: Official telecommunications infrastructure clearance obtained from BSNL/Telecommunication Department."
     }
   ],
   "amenitiesProgress": [
