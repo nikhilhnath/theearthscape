@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Earthscape Dashboard</title>
   
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6V9TR4SVDT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,19 +18,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   
   <style>
-    /* 3D Flip Card CSS */
     .perspective { perspective: 1000px; }
     .preserve-3d { transform-style: preserve-3d; }
     .backface-hidden { backface-visibility: hidden; }
     .rotate-y-180 { transform: rotateY(180deg); }
     @media (hover: hover) { .flip-card:hover .flip-card-inner { transform: rotateY(180deg); } }
     .flipped { transform: rotateY(180deg); }
-    
-    /* Scrollbar hiding for clean UI */
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    /* Custom thin scrollbar for tower elevation lists */
     .thin-scrollbar::-webkit-scrollbar { width: 4px; }
     .thin-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
     .thin-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -89,10 +83,11 @@
       </div>
     </div>
 
-    <!-- 3. Tower Elevation (Wing by Wing) -->
+    <!-- 3. Tower Elevation (All 6 Wings) -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-2 ml-2">Tower Elevation Status</h2>
-      <p class="text-sm text-slate-500 mb-4 ml-2">Floor-by-floor structural completion tracking for Phase 1 wings.</p>
+      <p class="text-sm text-slate-500 mb-4 ml-2">Floor-by-floor structural completion tracking for all Phase 1 wings.</p>
+      <!-- Now uses md:grid-cols-3 which creates 2 neat rows of 3 towers -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="towerContainer"></div>
     </div>
 
@@ -129,7 +124,7 @@
         <div class="max-w-3xl">
           <h2 class="text-xl font-bold text-slate-800">Inventory Encumbrance (Mortgage Status)</h2>
           <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-            When a developer takes a bank loan to fund construction, they pledge unsold units as collateral. This bar tracks how many units in Phase 1 are mortgaged (encumbered) versus free to be sold without a bank lien (unencumbered). High unencumbered stock generally indicates lower financial risk.
+            When a developer takes a bank loan to fund construction, they pledge unsold units as collateral. This bar tracks how many units in Phase 1 are mortgaged (encumbered) versus free to be sold without a bank lien (unencumbered).
           </p>
         </div>
         <div class="mt-2 md:mt-0 font-bold text-slate-700 bg-slate-100 px-4 py-2 rounded-lg text-sm shrink-0">
@@ -147,23 +142,30 @@
       </div>
     </div>
 
-    <!-- 6. Legal & NOC Section (Sorted) -->
+    <!-- 6. Legal & NOC Section -->
     <div>
       <h2 class="text-2xl font-bold text-slate-800 mb-6 ml-2">Legal & Approvals Matrix</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="riskMatrixContainer"></div>
     </div>
 
-    <!-- 7. Shared Amenities Progress -->
+    <!-- 7. Amenities & Common Areas -->
     <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Amenities & Common Infrastructure</h2>
-      <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6" id="amenitiesContainer"></div>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">Infrastructure & Amenities</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-lg mb-6 border-b border-slate-100 pb-2">Status of Amenities Details</h3>
+          <div class="grid grid-cols-1 gap-y-5" id="amenitiesContainer"></div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+          <h3 class="font-bold text-slate-800 text-lg mb-6 border-b border-slate-100 pb-2">Status of Common Areas</h3>
+          <div class="grid grid-cols-1 gap-y-5" id="commonAreasContainer"></div>
+        </div>
       </div>
     </div>
 
     <!-- 8. The Project Team -->
     <div>
-      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2">The Project Team</h2>
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 ml-2 mt-8">The Project Team</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="projectTeamContainer"></div>
     </div>
 
