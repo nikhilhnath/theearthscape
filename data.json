@@ -5,7 +5,9 @@
     "location": "Bengaluru East Taluk, Gunjur",
     "reraNumber": "PRM/KA/RERA/1251/446/PR/020925/008044",
     "updated": "Q3 2026",
-    "overallProgress": 26
+    "overallProgress": 26,
+    "targetHandover": "Dec 2027",
+    "reraValidity": "Mar 31, 2028"
   },
   "inventoryMeta": {
     "totalUnits": 648,
@@ -59,6 +61,12 @@
   ],
   "legalRiskMatrix": [
     { 
+      "title": "Active Litigation", 
+      "status": "Cleared", 
+      "frontDesc": "Zero active civil, criminal, or NCDRC cases pending.",
+      "backDesc": "Context: Developer declaration confirms no active stay orders, consumer forum disputes, or title litigations pending against the project layout."
+    },
+    { 
       "title": "BWSSB Clearance", 
       "status": "Pending", 
       "frontDesc": "₹2.75 Cr infrastructure charge for Cauvery water.",
@@ -94,6 +102,14 @@
       "frontDesc": "Provisional NOC from State Fire & Emergency Services.",
       "backDesc": "Context: Q4 2025 status showed pending approvals for fire driveways and refuge area planning.\n\nResolution: KSFES issued the Provisional NOC in Q1 2026, officially clearing the path for structural foundation work to commence."
     }
+  ],
+  "amenitiesProgress": [
+    { "name": "Main Clubhouse Structure", "progress": 15 },
+    { "name": "Sewage Treatment Plant (STP)", "progress": 40 },
+    { "name": "Rainwater Harvesting Pits", "progress": 30 },
+    { "name": "Swimming Pool", "progress": 0 },
+    { "name": "Landscaping & Parks", "progress": 5 },
+    { "name": "Power Backup (DG Sets)", "progress": 0 }
   ],
   "projectTeam": [
     { "role": "Principal Architect", "name": "Venkatraman Associates", "detail": "Leading the structural and aesthetic design." },
