@@ -81,6 +81,18 @@
       "status": "Cleared", 
       "frontDesc": "Tracing full titles across all 6 survey numbers.",
       "backDesc": "Context: RERA initially registered only Sy No. 63/2. \n\nResolution: The title trace has now been legally rectified and updated on the RERA portal to include all constituent Wing A parcels (63/2, 62/5, 63/4, 63/5, 62/4, 63/3)."
+    },
+    { 
+      "title": "AAI Height NOC", 
+      "status": "Cleared", 
+      "frontDesc": "Aviation clearance for maximum tower height.",
+      "backDesc": "Context: Initial Q4 2025 filing restricted tower heights pending Airport Authority of India (AAI) review.\n\nResolution: Official clearance received in Q1 2026 permitting full structural height construction up to G+18 floors without restriction."
+    },
+    { 
+      "title": "Fire Dept Approval", 
+      "status": "Cleared", 
+      "frontDesc": "Provisional NOC from State Fire & Emergency Services.",
+      "backDesc": "Context: Q4 2025 status showed pending approvals for fire driveways and refuge area planning.\n\nResolution: KSFES issued the Provisional NOC in Q1 2026, officially clearing the path for structural foundation work to commence."
     }
   ],
   "projectTeam": [
