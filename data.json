@@ -4,7 +4,7 @@
     "subtitle": "By bricks & milestones",
     "location": "Bengaluru East Taluk, Gunjur",
     "reraNumber": "PRM/KA/RERA/1251/446/PR/020925/008044",
-    "updated": "Q3 2026",
+    "updated": "Q2 2026-27 (Oct 2026)",
     "overallProgress": 26,
     "targetHandover": "Dec 2027",
     "reraValidity": "Mar 31, 2028"
@@ -36,118 +36,139 @@
       "escrow": { "collected": 155000000, "withdrawn": 85000000, "balance": 70000000 }
     }
   ],
-  "constructionMilestones": [
-    {
-      "title": "Excavation",
-      "status": "100% Complete",
-      "variance": "Completed",
-      "frontDesc": "Site digging and earthwork across the 22-acre parcel.",
-      "backDesc": "Context: All earthwork for Phase 1 is fully completed. Soil testing and retaining wall preparations have concluded as per the official RERA filing. Site is cleared for deep foundation work.\n\nTarget: Jan 2026 | Actual: Jan 2026"
-    },
-    {
-      "title": "Foundation & Footing",
-      "status": "85% Complete",
-      "variance": "Ahead of Schedule",
-      "frontDesc": "Raft foundation and structural footing execution.",
-      "backDesc": "Context: Sub-structure works are progressing rapidly. Tower A and B foundations are complete and cured, with Tower C currently underway.\n\nTarget: Dec 2026 | Expected: Nov 2026"
-    },
-    {
-      "title": "Slab Casting",
-      "status": "30% Complete",
-      "variance": "On Track",
-      "frontDesc": "Floor-by-floor concrete structure and columns.",
-      "backDesc": "Context: Ground and first-floor slabs have been cast for Wings A and B. Shuttering and steel reinforcement work is actively ongoing for the 2nd-floor slabs.\n\nTarget: Oct 2026 | Expected: Oct 2026"
-    }
+  "financialHealth": {
+    "estimatedCost": 5939267487,
+    "actualCost": 1573200000
+  },
+  "subStructure": [
+    { "name": "Earth work and other leveling", "progress": 95 },
+    { "name": "Foundation footing work", "progress": 100 },
+    { "name": "Upto Plinth Level", "progress": 65 },
+    { "name": "Sub-structure flooring (Parking, Basement)", "progress": 60 },
+    { "name": "Retaining wall (All types)", "progress": 50 }
+  ],
+  "superStructure": [
+    { "name": "RCC or MS Framed structure", "progress": 15 },
+    { "name": "Masonry Construction", "progress": 15 }
   ],
   "towerProgress": [
     {
       "wing": "Wing A",
+      "overallCompletion": 1,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 10 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 40 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 57, "availableUnits": 51,
+        "parkings": { "total": 108, "booked": 57, "available": 51 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 1, "available": 4 }, { "type": "3 BHK PLUS", "total": 103, "booked": 56, "available": 47 } ]
+      }
     },
     {
       "wing": "Wing B",
+      "overallCompletion": 1,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 10 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 40 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 42, "availableUnits": 66,
+        "parkings": { "total": 108, "booked": 42, "available": 66 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 0, "available": 5 }, { "type": "3 BHK PLUS", "total": 103, "booked": 42, "available": 61 } ]
+      }
     },
     {
       "wing": "Wing C",
+      "overallCompletion": 11,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 60 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 50 }, { "name": "Floor 3", "progress": 60 }, { "name": "Floor 2", "progress": 60 }, { "name": "Floor 1", "progress": 60 }, { "name": "Floor 0", "progress": 70 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 58, "availableUnits": 50,
+        "parkings": { "total": 108, "booked": 58, "available": 50 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 0, "available": 5 }, { "type": "3 BHK PLUS", "total": 103, "booked": 58, "available": 45 } ]
+      }
     },
     {
       "wing": "Wing D",
+      "overallCompletion": 16,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 10 }, { "name": "Floor 0", "progress": 80 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 60 }, { "name": "Floor 5", "progress": 60 }, { "name": "Floor 4", "progress": 60 }, { "name": "Floor 3", "progress": 60 }, { "name": "Floor 2", "progress": 60 }, { "name": "Floor 1", "progress": 60 }, { "name": "Floor 0", "progress": 85 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 49, "availableUnits": 59,
+        "parkings": { "total": 108, "booked": 49, "available": 59 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 0, "available": 5 }, { "type": "3 BHK PLUS", "total": 103, "booked": 49, "available": 54 } ]
+      }
     },
     {
       "wing": "Wing E",
+      "overallCompletion": 4,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 30 }, { "name": "Floor 0", "progress": 90 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 0 }, { "name": "Floor 0", "progress": 95 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 40, "availableUnits": 68,
+        "parkings": { "total": 211, "booked": 40, "available": 171 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 0, "available": 5 }, { "type": "3 BHK PLUS", "total": 103, "booked": 40, "available": 63 } ]
+      }
     },
     {
       "wing": "Wing F",
+      "overallCompletion": 31,
       "floors": [
-        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 0 }, { "name": "Floor 11", "progress": 0 }, { "name": "Floor 10", "progress": 0 }, { "name": "Floor 9", "progress": 0 }, { "name": "Floor 8", "progress": 0 }, { "name": "Floor 7", "progress": 0 }, { "name": "Floor 6", "progress": 0 }, { "name": "Floor 5", "progress": 0 }, { "name": "Floor 4", "progress": 0 }, { "name": "Floor 3", "progress": 0 }, { "name": "Floor 2", "progress": 0 }, { "name": "Floor 1", "progress": 80 }, { "name": "Floor 0", "progress": 100 }
-      ]
+        { "name": "Floor 26", "progress": 0 }, { "name": "Floor 25", "progress": 0 }, { "name": "Floor 24", "progress": 0 }, { "name": "Floor 23", "progress": 0 }, { "name": "Floor 22", "progress": 0 }, { "name": "Floor 21", "progress": 0 }, { "name": "Floor 20", "progress": 0 }, { "name": "Floor 19", "progress": 0 }, { "name": "Floor 18", "progress": 0 }, { "name": "Floor 17", "progress": 0 }, { "name": "Floor 16", "progress": 0 }, { "name": "Floor 15", "progress": 0 }, { "name": "Floor 14", "progress": 0 }, { "name": "Floor 13", "progress": 0 }, { "name": "Floor 12", "progress": 60 }, { "name": "Floor 11", "progress": 60 }, { "name": "Floor 10", "progress": 60 }, { "name": "Floor 9", "progress": 60 }, { "name": "Floor 8", "progress": 60 }, { "name": "Floor 7", "progress": 60 }, { "name": "Floor 6", "progress": 60 }, { "name": "Floor 5", "progress": 60 }, { "name": "Floor 4", "progress": 60 }, { "name": "Floor 3", "progress": 60 }, { "name": "Floor 2", "progress": 60 }, { "name": "Floor 1", "progress": 90 }, { "name": "Floor 0", "progress": 100 }
+      ],
+      "inventory": {
+        "totalUnits": 108, "bookedUnits": 29, "availableUnits": 79,
+        "parkings": { "total": 211, "booked": 29, "available": 182 },
+        "breakdown": [ { "type": "2 BHK", "total": 5, "booked": 0, "available": 5 }, { "type": "3 BHK PLUS", "total": 103, "booked": 29, "available": 74 } ]
+      }
     }
   ],
   "legalRiskMatrix": [
     { 
-      "title": "Active Litigation Status", 
-      "status": "Cleared", 
+      "title": "Active Litigation Status", "status": "Cleared", 
       "frontDesc": "Zero active civil, criminal, or NCDRC cases.",
       "backDesc": "Context: Developer declaration confirms no active stay orders, consumer forum disputes, or title litigations pending against the project layout."
     },
     { 
-      "title": "Water Supply & Sewage Board", 
-      "status": "Cleared", 
+      "title": "Water Supply & Sewage Board", "status": "Cleared", 
       "frontDesc": "Approved on 04-03-2025.",
       "backDesc": "Status: Officially approved and cleared by BWSSB."
     },
     { 
-      "title": "KSPCB - PCB (10 to 125 Acres)", 
-      "status": "Cleared", 
+      "title": "KSPCB - PCB (10 to 125 Acres)", "status": "Cleared", 
       "frontDesc": "Approved on 21-08-2025.",
       "backDesc": "Status: Officially approved by the Karnataka State Pollution Control Board."
     },
     { 
-      "title": "KSPCB - MOEF (Above 50 Acres)", 
-      "status": "Cleared", 
+      "title": "KSPCB - MOEF (Above 50 Acres)", "status": "Cleared", 
       "frontDesc": "Approved on 15-01-2025.",
       "backDesc": "Status: Ministry of Environment, Forest and Climate Change clearance obtained via KSPCB."
     },
     { 
-      "title": "KPTCL - BESCOM", 
-      "status": "Cleared", 
+      "title": "KPTCL - BESCOM", "status": "Cleared", 
       "frontDesc": "Approved on 10-02-2025.",
       "backDesc": "Status: Official electrical infrastructure clearance received from BESCOM/KPTCL."
     },
     { 
-      "title": "Fire and Safety", 
-      "status": "Cleared", 
+      "title": "Fire and Safety", "status": "Cleared", 
       "frontDesc": "Approved on 07-03-2025.",
       "backDesc": "Status: Official Fire & Safety NOC cleared by the state department."
     },
     { 
-      "title": "Airport Authority of India", 
-      "status": "Cleared", 
+      "title": "Airport Authority of India", "status": "Cleared", 
       "frontDesc": "Approved on 13-08-2024.",
       "backDesc": "Status: AAI clearance obtained for maximum structural height."
     },
     { 
-      "title": "BSNL/Telecommunication", 
-      "status": "Cleared", 
+      "title": "BSNL/Telecommunication", "status": "Cleared", 
       "frontDesc": "Approved on 12-11-2024.",
       "backDesc": "Status: Official telecommunications infrastructure clearance obtained."
     }
   ],
   "amenitiesProgress": [
+    { "name": "Sewage Treatment Plant (STP)", "progress": 25 },
     { "name": "Electricity", "progress": 0 },
     { "name": "CCTV Surveillance", "progress": 0 },
     { "name": "Club House", "progress": 0 },
@@ -161,12 +182,12 @@
     { "name": "Water and Sanitation", "progress": 0 }
   ],
   "commonAreasProgress": [
-    { "name": "Staircases", "progress": 0 },
+    { "name": "Basement", "progress": 30 },
+    { "name": "Staircases", "progress": 10 },
     { "name": "Lifts", "progress": 0 },
     { "name": "Corridor/Lobbies", "progress": 0 },
     { "name": "Fire escapes", "progress": 0 },
     { "name": "Common entrance and exit", "progress": 0 },
-    { "name": "Basement", "progress": 0 },
     { "name": "Terrace", "progress": 0 },
     { "name": "Outer Wall", "progress": 0 },
     { "name": "Open parking areas", "progress": 0 }
