@@ -90,29 +90,6 @@
     "advanceCollected": 1827615663,
     "amountWithdrawn": 1416601723
   },
-  "constructionMilestones": [
-    {
-      "title": "Excavation",
-      "status": "100% Complete",
-      "variance": "Completed",
-      "frontDesc": "Site digging and earthwork across the 22-acre parcel.",
-      "backDesc": "Context: All earthwork for Phase 1 is fully completed.\nTarget: Jan 2026 | Actual: Jan 2026"
-    },
-    {
-      "title": "Foundation & Footing",
-      "status": "100% Complete",
-      "variance": "Ahead of Schedule",
-      "frontDesc": "Raft foundation and structural footing execution.",
-      "backDesc": "Context: Sub-structure works progressing rapidly.\nTarget: Dec 2026 | Actual: Oct 2026"
-    },
-    {
-      "title": "Slab Casting",
-      "status": "30% Complete",
-      "variance": "On Track",
-      "frontDesc": "Floor-by-floor concrete structure and columns.",
-      "backDesc": "Context: Super-structure works actively ongoing.\nTarget: Oct 2026 | Expected: Oct 2026"
-    }
-  ],
   "subStructure": [
     {
       "name": "Earth work and other leveling",
@@ -541,70 +518,70 @@
       "title": "Water Supply & Sewage Board",
       "status": "Approved",
       "date": "04-03-2025",
-      "file": "BWSSB_NOC.pdf"
+      "file": "BWSSB NOC.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "KSPCB - PCB (10 to 125 Acres)",
       "status": "Approved",
       "date": "21-08-2025",
-      "file": "KSPCB_PCB_NOC.pdf"
+      "file": "PCB NOC CFE Gunjuru.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "KSPCB - MOEF (Above 50 Acres)",
       "status": "Approved",
       "date": "15-01-2025",
-      "file": "KSPCB_MOEF_NOC.pdf"
+      "file": "MOEF NOCcompressed.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "KPTCL - BESCOM",
       "status": "Approved",
       "date": "10-02-2025",
-      "file": "BESCOM_NOC.pdf"
+      "file": "BESCOM NOC for PH1.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "Fire and Safety",
       "status": "Approved",
       "date": "07-03-2025",
-      "file": "Fire_Safety_NOC.pdf"
+      "file": "FIRE NOC.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "Airport Authority of India",
       "status": "Approved",
       "date": "13-08-2024",
-      "file": "AAI_NOC.pdf"
+      "file": "AAI NOC.pdf"
     },
     {
       "category": "Legal NOCs",
       "title": "Telecom",
       "status": "Approved",
       "date": "12-11-2024",
-      "file": "Telecom_NOC.pdf"
+      "file": "BSNL NOC.pdf"
     },
     {
       "category": "Financial Certificates",
       "title": "Form-4 CA Certificate",
       "status": "Q2 Uploaded",
       "date": "Oct 2026",
-      "file": "CA_Q2_26_27.pdf"
+      "file": "CA Q22627.pdf"
     },
     {
       "category": "Financial Certificates",
       "title": "Form-5 Architect Certificate",
       "status": "Q2 Uploaded",
       "date": "Oct 2026",
-      "file": "ARC_Q2_26_27.pdf"
+      "file": "ARC Q22627.pdf"
     },
     {
       "category": "Financial Certificates",
       "title": "Form-6 Structural Engineer Certificate",
       "status": "Q2 Uploaded",
       "date": "Oct 2026",
-      "file": "ENG_Q2_26_27.pdf"
+      "file": "ENG Q22627.pdf"
     }
   ],
   "amenitiesProgress": [
@@ -714,23 +691,6 @@
       "name": "Open parking areas",
       "progress": 0,
       "icon": "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-    }
-  ],
-  "projectTeam": [
-    {
-      "role": "Principal Architect",
-      "name": "Venkatraman Associates",
-      "detail": "Leading the structural and aesthetic design."
-    },
-    {
-      "role": "Structural Engineer",
-      "name": "Innotech Engineering",
-      "detail": "Responsible for foundation and tower stability."
-    },
-    {
-      "role": "Main Contractor",
-      "name": "Earthscape Buildcon",
-      "detail": "Executing the physical on-site construction."
     }
   ]
 }
