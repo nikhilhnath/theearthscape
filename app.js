@@ -104,7 +104,7 @@ try {
       const superContainer = document.getElementById('superStructureContainer');
       data.superStructure.forEach(item => { superContainer.innerHTML += generateProgressBar(item); });
 
-      // 5. Tower Elevation & Inventory Injection (Spaced headers BKD and AVL)
+      // 5. Tower Elevation & Images Injection
       const towerContainer = document.getElementById('towerContainer');
       data.towerProgress.forEach(tower => {
         let floorsHTML = '';
@@ -122,7 +122,6 @@ try {
           `;
         });
 
-        // Inventory Footer with spaced columns BKD and AVL
         let inv = tower.inventory;
         let breakdownHTML = '';
         inv.breakdown.forEach(b => {
@@ -139,20 +138,27 @@ try {
         });
         
         towerContainer.innerHTML += `
-          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-[500px]">
-            <h3 class="text-lg font-bold text-slate-800 mb-4 border-b border-slate-100 pb-3 flex justify-between items-center">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-[650px]">
+            <h3 class="text-lg font-bold text-slate-800 mb-3 border-b border-slate-100 pb-3 flex justify-between items-center">
               ${tower.wing} 
               <span class="bg-emerald-100 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider">
                 Overall: ${tower.overallCompletion}%
               </span>
             </h3>
             
+            <div class="mb-4 rounded-xl overflow-hidden shadow-sm border border-slate-100 relative h-36">
+              <img src="${tower.imageUrl}" alt="${tower.wing} site picture" class="w-full h-full object-cover zoom-image cursor-zoom-in" data-zoom-src="${tower.imageUrl}" />
+              <div class="absolute bottom-2 right-2 bg-black/50 backdrop-blur text-white px-2 py-1 rounded text-[9px] font-bold uppercase pointer-events-none">
+                Q2 Status
+              </div>
+            </div>
+            
             <div class="overflow-y-auto flex-1 thin-scrollbar flex flex-col gap-2.5 pr-2 w-full mb-4">
               ${floorsHTML}
             </div>
 
             <!-- Inventory Footer -->
-            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 shrink-0">
               <div class="flex justify-between items-center text-[10px] uppercase font-black tracking-wider text-slate-400 mb-2 border-b border-slate-200 pb-1">
                 <span>Unit Type</span>
                 <div class="flex gap-2 text-right">
@@ -170,28 +176,37 @@ try {
                   <span class="w-10 text-emerald-600">${inv.availableUnits}</span>
                 </div>
               </div>
-              <div class="flex justify-between items-center text-[10px] pt-2 mt-2 border-t border-slate-200 font-bold text-slate-500">
-                <span>Car Parkings</span>
-                <div class="flex gap-2 text-right">
-                  <span class="w-10">${inv.parkings.total}</span>
-                  <span class="w-10 text-indigo-500">${inv.parkings.booked}</span>
-                  <span class="w-10 text-emerald-500">${inv.parkings.available}</span>
-                </div>
-              </div>
             </div>
           </div>
         `;
       });
+      
+      // Initialize Medium Zoom for Images
+      mediumZoom('.zoom-image', { margin: 24, background: 'rgba(15, 23, 42, 0.9)' });
 
-      // 6. Time-Series Charts (Escrow & Sales)
+      // 6. Time-Series Charts (Historical, Escrow, Sales)
       const quarters = data.timeSeries.map(q => q.quarter);
+      
+      const overallProg = data.timeSeries.map(q => q.construction.overall);
+      const subProg = data.timeSeries.map(q => q.construction.sub);
+      const superProg = data.timeSeries.map(q => q.construction.super);
+      new Chart(document.getElementById('historicalProgressChart').getContext('2d'), {
+        type: 'line',
+        data: { labels: quarters, datasets: [ 
+          { label: 'Overall Completion %', data: overallProg, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 4, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#fff' },
+          { label: 'Sub-Structure %', data: subProg, borderColor: '#3b82f6', backgroundColor: '#3b82f6', borderDash: [5, 5], borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' },
+          { label: 'Super-Structure %', data: superProg, borderColor: '#8b5cf6', backgroundColor: '#8b5cf6', borderDash: [5, 5], borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#fff' }
+        ] },
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom' }, datalabels: { display: function(context) { return context.datasetIndex === 0; }, align: 'top', backgroundColor: '#10b981', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: 4, formatter: (val) => val + '%' } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, max: 100 } } }
+      });
+
       const collected = data.timeSeries.map(q => q.escrow.collected);
       const withdrawn = data.timeSeries.map(q => q.escrow.withdrawn);
       const balance = data.timeSeries.map(q => q.escrow.balance);
       new Chart(document.getElementById('escrowChart').getContext('2d'), {
         type: 'bar',
         data: { labels: quarters, datasets: [ { type: 'line', label: 'Escrow Balance', data: balance, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 3, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff' }, { type: 'bar', label: 'Total Collected', data: collected, backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.7 }, { type: 'bar', label: 'Total Withdrawn', data: withdrawn, backgroundColor: '#f43f5e', borderRadius: 4, barPercentage: 0.7 } ] },
-        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6, callbacks: { label: function(context) { return context.dataset.label + ': ' + formatINR(context.raw); } } }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#10b981', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 }, formatter: function(value) { return formatShortINR(value); } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6, callback: function(value) { return formatINR(value); } } } } }
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom' }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', backgroundColor: '#10b981', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: 4, formatter: function(value) { return formatShortINR(value); } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6, callback: function(value) { return formatINR(value); } } } } }
       });
 
       const booked = data.timeSeries.map(q => q.sales.booked);
@@ -199,10 +214,10 @@ try {
       new Chart(document.getElementById('salesChart').getContext('2d'), {
         type: 'bar',
         data: { labels: quarters, datasets: [ { type: 'line', label: 'Unsold Inventory', data: unsold, borderColor: '#64748b', backgroundColor: '#64748b', borderWidth: 3, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#fff' }, { type: 'bar', label: 'Cumulative Bookings', data: booked, backgroundColor: '#6366f1', borderRadius: 4, barPercentage: 0.5 } ] },
-        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, layout: { padding: { top: 20, right: 20 } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8, font: { size: 11, family: 'sans-serif' }, padding: 20 } }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.95)', titleFont: { size: 13 }, bodyFont: { size: 12 }, padding: 12, cornerRadius: 8, boxPadding: 6 }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', anchor: 'bottom', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: { x: 6, y: 4 } } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } } }
+        options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom' }, datalabels: { display: function(context) { return context.dataset.type === 'line'; }, align: 'top', backgroundColor: '#64748b', borderRadius: 4, color: 'white', font: { weight: 'bold', size: 10 }, padding: 4 } }, scales: { x: { grid: { display: false } }, y: { border: { display: false }, ticks: { maxTicksLimit: 6 } } } }
       });
 
-      // 7. Financial Cost Tracker
+      // 7. Financial Cost Tracker & Certificates
       const estCost = data.financialHealth.estimatedCost;
       const actCost = data.financialHealth.actualCost;
       const costPercent = ((actCost / estCost) * 100).toFixed(1);
@@ -215,63 +230,45 @@ try {
         if (costPercent > 5) costBar.textContent = `${costPercent}%`;
       }, 400);
 
-      // 8. Encumbrance Bar Animation
-      const total = data.inventoryMeta.totalUnits;
-      const mortgaged = data.inventoryMeta.mortgaged;
-      const unencumbered = data.inventoryMeta.unencumbered;
-      const mortPercent = (mortgaged / total) * 100;
-      document.getElementById('totalUnitsText').textContent = total;
-      setTimeout(() => {
-        const mortBar = document.getElementById('mortgageBar');
-        mortBar.style.width = `${mortPercent}%`;
-        mortBar.textContent = `${mortgaged} Units`;
-        document.getElementById('unencumberedText').textContent = `${unencumbered} Units`;
-      }, 300);
+      document.getElementById('advanceCollectedText').textContent = formatINR(data.financialHealth.advanceCollected);
+      document.getElementById('amountWithdrawnText').textContent = formatINR(data.financialHealth.amountWithdrawn);
+      
+      const certContainer = document.getElementById('certificatesContainer');
+      data.financialHealth.certificates.forEach(cert => {
+        certContainer.innerHTML += `
+          <div class="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span class="text-sm font-bold text-slate-700">${cert.name}</span>
+            </div>
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">${cert.status}</span>
+          </div>
+        `;
+      });
 
-      // 9. Legal Risk Matrix
+      // 8. Legal Risk Matrix
       const riskContainer = document.getElementById('riskMatrixContainer');
-      const generateLegalCard = (title, status, frontDesc, backDesc) => {
-        let colorClass = 'bg-slate-100 text-slate-700';
-        if (status === 'Cleared') colorClass = 'bg-emerald-100 text-emerald-800 border-emerald-200';
-        else if (status.includes('Progress')) colorClass = 'bg-amber-100 text-amber-800 border-amber-200';
-        else if (status === 'Pending') colorClass = 'bg-rose-100 text-rose-800 border-rose-200';
-
-        return `
+      data.legalRiskMatrix.forEach(item => {
+        let colorClass = item.status === 'Cleared' ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-amber-100 text-amber-800 border-amber-200';
+        riskContainer.innerHTML += `
           <div class="flip-card perspective h-52 w-full cursor-pointer">
             <div class="flip-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
               <div class="absolute w-full h-full backface-hidden bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
                 <div>
                   <div class="flex justify-between items-start mb-2">
-                    <h3 class="font-bold text-slate-800 text-base leading-tight pr-1">${title}</h3>
-                    <span class="px-2 py-0.5 text-[10px] font-bold rounded border whitespace-nowrap ${colorClass}">${status}</span>
+                    <h3 class="font-bold text-slate-800 text-base leading-tight pr-1">${item.title}</h3>
+                    <span class="px-2 py-0.5 text-[10px] font-bold rounded border whitespace-nowrap ${colorClass}">${item.status}</span>
                   </div>
-                  <p class="text-slate-600 text-sm font-medium line-clamp-3">${frontDesc}</p>
-                </div>
-                <div class="text-[11px] text-indigo-500 font-bold flex items-center gap-1">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                  Tap for details
+                  <p class="text-slate-600 text-sm font-medium line-clamp-3">${item.frontDesc}</p>
                 </div>
               </div>
-              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto thin-scrollbar flex flex-col justify-start pt-5 pr-2">
-                <h3 class="font-bold text-indigo-300 text-sm mb-2 border-b border-slate-600 pb-2">${title}</h3>
-                <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-line">${backDesc}</p>
+              <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white border border-slate-700 rounded-2xl p-5 shadow-lg overflow-y-auto flex flex-col pt-5">
+                <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-line">${item.backDesc}</p>
               </div>
             </div>
           </div>
         `;
-      };
-      data.legalRiskMatrix.sort((a, b) => {
-        if (a.title.includes("Litigation")) return -1;
-        if (b.title.includes("Litigation")) return 1;
-        const weights = { "Cleared": 1, "In Progress": 2, "Pending": 3 };
-        return weights[a.status] - weights[b.status];
-      }).forEach(item => { riskContainer.innerHTML += generateLegalCard(item.title, item.status, item.frontDesc, item.backDesc); });
-
-      // 10. Amenities & Common Areas
-      const amenitiesContainer = document.getElementById('amenitiesContainer');
-      data.amenitiesProgress.forEach(am => { amenitiesContainer.innerHTML += generateProgressBar(am); });
-      const commonAreasContainer = document.getElementById('commonAreasContainer');
-      data.commonAreasProgress.forEach(ca => { commonAreasContainer.innerHTML += generateProgressBar(ca); });
+      });
 
       // Global bar animation trigger
       setTimeout(() => {
@@ -280,32 +277,14 @@ try {
         });
       }, 500);
 
-      // 11. Project Team
-      const teamContainer = document.getElementById('projectTeamContainer');
-      data.projectTeam.forEach(member => {
-        teamContainer.innerHTML += `
-          <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col">
-            <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-1">${member.role}</span>
-            <span class="text-lg font-bold text-slate-800">${member.name}</span>
-            <p class="text-xs text-slate-500 mt-2 leading-relaxed">${member.detail}</p>
-          </div>
-        `;
-      });
-
-      // 12. Mobile Tap Fix
+      // Mobile Tap Fix
       document.querySelectorAll('.flip-card').forEach(card => {
         card.addEventListener('click', () => { card.querySelector('.flip-card-inner').classList.toggle('flipped'); });
       });
 
     })
-    .catch(error => {
-      document.getElementById('projectName').textContent = "⚠️ Data Loading Error";
-      document.getElementById('projectDetails').textContent = "Check if data.json is properly formatted. Error: " + error.message;
-      console.error(error);
-    });
+    .catch(error => console.error(error));
 
 } catch (error) {
-  document.getElementById('projectName').textContent = "⚠️ Script Error";
-  document.getElementById('projectDetails').textContent = "There is a typo in app.js. Error: " + error.message;
   console.error(error);
 }
