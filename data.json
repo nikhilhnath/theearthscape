@@ -166,7 +166,7 @@
     {
       "wing": "Wing A",
       "overallCompletion": 1,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-A-scaled.jpg",
+      "imageUrl": "wing-a.webp",
       "floors": [
         {
           "name": "Floor 26",
@@ -209,7 +209,7 @@
     {
       "wing": "Wing B",
       "overallCompletion": 1,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-B-scaled.jpg",
+      "imageUrl": "wing-b.webp",
       "floors": [
         {
           "name": "Floor 26",
@@ -252,7 +252,7 @@
     {
       "wing": "Wing C",
       "overallCompletion": 11,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-C-3rd-Floor-Slab-Completed-scaled.jpg",
+      "imageUrl": "wing-c.webp",
       "floors": [
         {
           "name": "Floor 26",
@@ -307,7 +307,7 @@
     {
       "wing": "Wing D",
       "overallCompletion": 16,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-D-8th-Floor-Slab-Completed-scaled.jpg",
+      "imageUrl": "wing-d.webp",
       "floors": [
         {
           "name": "Floor 26",
@@ -378,7 +378,7 @@
     {
       "wing": "Wing E",
       "overallCompletion": 4,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-E-Lower-Basement-Completed-scaled.jpg",
+      "imageUrl": "wing-e.webp",
       "floors": [
         {
           "name": "Floor 26",
@@ -421,7 +421,7 @@
     {
       "wing": "Wing F",
       "overallCompletion": 31,
-      "imageUrl": "https://bricksandmilestones.com/wp-content/uploads/2026/09/Wing-F-12th-floor-slab-completed-scaled.jpg",
+      "imageUrl": "wing-f.webp",
       "floors": [
         {
           "name": "Floor 26",
