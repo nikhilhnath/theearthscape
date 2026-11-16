@@ -1,9 +1,46 @@
 try {
   Chart.register(ChartDataLabels);
 
-  let chartsRendered = false; // Flag to render charts only once
+  let chartsRendered = false;
+  
+  // Gatekeeper Logic
+  const loginBtn = document.getElementById('loginBtn');
+  const passInput = document.getElementById('passcodeData');
+  const loginScreen = document.getElementById('loginScreen');
+  const mainDashboard = document.getElementById('mainDashboard');
+  const mobileNav = document.getElementById('mobileNav');
+  const loginError = document.getElementById('loginError');
+  
+  const grantAccess = () => {
+    loginScreen.style.opacity = '0';
+    setTimeout(() => {
+      loginScreen.style.display = 'none';
+      mainDashboard.classList.remove('opacity-0', 'pointer-events-none');
+      if (window.innerWidth < 768) {
+        mobileNav.classList.remove('opacity-0', 'pointer-events-none');
+      }
+      if(window.appData && !chartsRendered) {
+         renderCharts(window.appData);
+         chartsRendered = true;
+         // Setup zoom after rendering
+         if(window.mediumZoom) mediumZoom('.zoom-image', { margin: 24, background: 'rgba(15, 23, 42, 0.95)' });
+      }
+    }, 500);
+  };
+  
+  loginBtn.addEventListener('click', () => {
+    if(passInput.value === 'TEOA@2030') grantAccess();
+    else {
+      loginError.style.opacity = '1';
+      setTimeout(() => { loginError.style.opacity = '0'; }, 2000);
+    }
+  });
+  
+  passInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginBtn.click();
+  });
 
-  // Setup Tab Logic First
+  // Setup Tab Logic
   const setupTabs = () => {
     const tabs = document.querySelectorAll('.tab-content');
     const btns = document.querySelectorAll('.tab-btn');
@@ -11,26 +48,19 @@ try {
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-target');
-        
-        // Hide all tabs
         tabs.forEach(t => t.classList.remove('active'));
-        // Show target tab
         const targetTab = document.getElementById(targetId);
         if(targetTab) targetTab.classList.add('active');
 
-        // Reset all buttons styling
         btns.forEach(b => {
-          // Mobile reset
           b.classList.remove('text-indigo-600', 'active');
           if(b.closest('#mobileNav')) b.classList.add('text-slate-400');
-          // Desktop reset
           if(b.closest('#desktopNav')) {
             b.classList.remove('text-indigo-600', 'border-indigo-600', 'bg-indigo-50');
             b.classList.add('text-slate-500', 'border-transparent');
           }
         });
 
-        // Activate clicked button (sync mobile and desktop if same target)
         document.querySelectorAll(`.tab-btn[data-target="${targetId}"]`).forEach(b => {
            b.classList.add('active');
            if(b.closest('#mobileNav')) {
@@ -43,11 +73,8 @@ try {
            }
         });
         
-        // Only render charts when Overview tab is visible to prevent sizing bugs
-        if(targetId === 'tab-overview' && !chartsRendered && window.appData) {
-            renderCharts(window.appData);
-            chartsRendered = true;
-        }
+        // Re-attach zoom to new visible images just in case
+        if(window.mediumZoom) mediumZoom('.zoom-image', { margin: 24, background: 'rgba(15, 23, 42, 0.95)' });
       });
     });
   };
@@ -60,7 +87,7 @@ try {
       return response.json();
     })
     .then(data => {
-      window.appData = data; // Store globally for lazy chart rendering
+      window.appData = data; 
       
       const formatINR = (value) => {
         if (value >= 10000000) return '₹' + (value / 10000000).toFixed(2) + ' Cr';
@@ -70,7 +97,8 @@ try {
 
       if(document.getElementById('projectName')) document.getElementById('projectName').textContent = data.projectMeta.name;
       if(document.getElementById('projectDetails')) document.getElementById('projectDetails').textContent = `${data.projectMeta.location} | RERA ID: ${data.projectMeta.reraNumber}`;
-
+      if(document.getElementById('handoverDate')) document.getElementById('handoverDate').textContent = data.projectMeta.targetHandover;
+      if(document.getElementById('validityDate')) document.getElementById('validityDate').textContent = data.projectMeta.reraValidity;
       if(document.getElementById('overallPercentText')) document.getElementById('overallPercentText').textContent = `${data.projectMeta.overallProgress}%`;
       
       const latestSales = data.timeSeries[data.timeSeries.length - 1].sales;
@@ -99,6 +127,28 @@ try {
           `;
         });
       }
+      
+      // Site Plan Interactive Overlays
+      const sitePlanContainer = document.getElementById('sitePlanMarkers');
+      if (sitePlanContainer && data.sitePlanServices) {
+         data.sitePlanServices.forEach((service) => {
+           let badgeColor = service.progress === 100 ? 'bg-emerald-500' : (service.progress > 0 ? 'bg-amber-500' : 'bg-slate-700');
+           let pingAnimation = service.progress > 0 && service.progress < 100 ? `<div class="absolute inset-0 rounded-full border-2 border-emerald-500 marker-pulse"></div>` : '';
+           
+           sitePlanContainer.innerHTML += `
+             <div class="absolute flex flex-col items-center transform -translate-x-1/2 -translate-y-1/2 z-10" style="top: ${service.top}; left: ${service.left};">
+                <div class="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full ${badgeColor} shadow-md border-2 border-white flex items-center justify-center text-white text-[10px] sm:text-xs font-bold z-10">
+                   ${service.id}
+                   ${pingAnimation}
+                </div>
+                <div class="mt-1 bg-white/90 backdrop-blur border border-slate-200 px-1.5 py-0.5 rounded shadow-sm text-center whitespace-nowrap">
+                  <span class="block text-[8px] sm:text-[9px] font-bold text-slate-800">${service.name}</span>
+                  <span class="block text-[8px] sm:text-[9px] font-black text-indigo-600">${service.progress}%</span>
+                </div>
+             </div>
+           `;
+         });
+      }
 
       const generateProgressBar = (item) => {
         let barColor = item.progress === 100 ? 'bg-emerald-500' : (item.progress > 0 ? 'bg-indigo-500' : 'bg-slate-200');
@@ -118,6 +168,7 @@ try {
       
       const superContainer = document.getElementById('superStructureContainer');
       if(superContainer && data.superStructure) data.superStructure.forEach(item => superContainer.innerHTML += generateProgressBar(item));
+      
       const finishContainer = document.getElementById('finishingStructureContainer');
       if(finishContainer && data.finishingStructure) data.finishingStructure.forEach(item => finishContainer.innerHTML += generateProgressBar(item));
 
@@ -209,8 +260,6 @@ try {
             </div>
           `;
         });
-        
-        if(window.mediumZoom) mediumZoom('.zoom-image', { margin: 24, background: 'rgba(15, 23, 42, 0.9)' });
       }
 
       // Financial Flow
@@ -218,30 +267,35 @@ try {
       if(document.getElementById('flowEscrowText')) document.getElementById('flowEscrowText').textContent = formatINR(data.financialHealth.amountWithdrawn);
       if(document.getElementById('flowCostText')) document.getElementById('flowCostText').textContent = formatINR(data.financialHealth.actualCost);
 
-      // Engineering & Brands
+      // Engineering & Visual Highlights
       const engGrid = document.getElementById('engineeringGrid');
       if (engGrid && data.engineeringSpecs) {
         data.engineeringSpecs.forEach(spec => {
           engGrid.innerHTML += `
-            <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-center">
+            <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-center flex flex-col justify-center">
               <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">${spec.label}</span>
               <span class="block text-xl font-black text-slate-800 mb-1">${spec.value}</span>
-              <span class="block text-xs font-medium text-slate-500 leading-tight">${spec.detail}</span>
+              <span class="block text-[10px] font-medium text-slate-500 leading-tight">${spec.detail}</span>
             </div>
           `;
         });
       }
 
-      const mivanGrid = document.getElementById('mivanGrid');
-      if (mivanGrid && data.mivanFeatures) {
-        data.mivanFeatures.forEach(feat => {
-          mivanGrid.innerHTML += `
-            <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
-              <span class="block text-sm font-black text-slate-800 mb-1">${feat.title}</span>
-              <span class="block text-xs font-medium text-slate-500 leading-tight">${feat.desc}</span>
-            </div>
-          `;
-        });
+      const engVisGrid = document.getElementById('engineeringVisualsGrid');
+      if (engVisGrid && data.engineeringHighlights) {
+         data.engineeringHighlights.forEach(highlight => {
+            engVisGrid.innerHTML += `
+              <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                 <div class="h-48 bg-slate-100 w-full relative">
+                    <img src="${highlight.image}" loading="lazy" alt="${highlight.title}" class="w-full h-full object-cover zoom-image cursor-zoom-in" data-zoom-src="${highlight.image}" onerror="this.src='https://via.placeholder.com/600x300?text=Please+Upload+${highlight.image}'">
+                 </div>
+                 <div class="p-5">
+                    <h4 class="font-bold text-slate-800 mb-1">${highlight.title}</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">${highlight.desc}</p>
+                 </div>
+              </div>
+            `;
+         });
       }
 
       const brandsGrid = document.getElementById('brandsGrid');
@@ -249,11 +303,13 @@ try {
         data.premiumBrands.forEach(brand => {
           brandsGrid.innerHTML += `
             <div class="flex justify-between items-center bg-slate-50 border border-slate-100 rounded-lg p-3">
-              <div class="flex flex-col">
+              <div class="flex flex-col flex-1 pr-2">
                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${brand.category}</span>
-                <span class="text-xs font-medium text-slate-500 pr-2">${brand.detail}</span>
+                <span class="text-xs font-medium text-slate-500 leading-tight">${brand.detail}</span>
               </div>
-              <span class="text-sm font-black text-slate-800 text-right shrink-0">${brand.brand}</span>
+              <div class="w-20 h-10 shrink-0 flex items-center justify-end">
+                  <img src="${brand.logoUrl}" class="max-h-full max-w-full object-contain mix-blend-multiply" alt="${brand.brand} logo" onerror="this.outerHTML='<span class=\'text-sm font-black text-slate-800 text-right\'>${brand.brand}</span>'">
+              </div>
             </div>
           `;
         });
@@ -307,7 +363,6 @@ try {
       if(docBody && data.documentMatrix) {
         data.documentMatrix.forEach(doc => {
           let badgeColor = doc.status.includes('Approved') || doc.status.includes('Uploaded') || doc.status.includes('Received') ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800';
-          let fileExt = doc.file.split('.').pop().toUpperCase();
           docBody.innerHTML += `
             <tr class="hover:bg-slate-50 transition-colors">
               <td class="p-4 text-xs font-bold text-slate-500 whitespace-nowrap">${doc.category}</td>
@@ -325,19 +380,28 @@ try {
         });
       }
 
-      const faqContainer = document.getElementById('faqContainer');
-      if (faqContainer && data.faq) {
+      // Visual FAQ
+      const visFaqContainer = document.getElementById('visualFaqContainer');
+      if (visFaqContainer && data.faq) {
         data.faq.forEach((item, index) => {
-          faqContainer.innerHTML += `
+          let imageHTML = item.image ? `
+             <div class="mt-4 rounded-xl overflow-hidden shadow-sm border border-slate-200">
+                <img src="${item.image}" loading="lazy" class="w-full h-auto zoom-image cursor-zoom-in" data-zoom-src="${item.image}" alt="FAQ clarification" onerror="this.style.display='none'">
+             </div>` : '';
+          
+          visFaqContainer.innerHTML += `
             <details class="group p-6 [&_summary::-webkit-details-marker]:hidden">
               <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-slate-800">
-                <h2 class="font-bold text-lg">${item.q}</h2>
+                <h2 class="font-bold text-base md:text-lg">${item.q}</h2>
                 <span class="relative size-5 shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </span>
               </summary>
-              <p class="mt-4 leading-relaxed text-slate-600">${item.a}</p>
+              <div class="mt-4">
+                 <p class="leading-relaxed text-sm text-slate-600 mb-2">${item.a}</p>
+                 ${imageHTML}
+              </div>
             </details>
           `;
         });
@@ -348,10 +412,6 @@ try {
           bar.style.width = bar.getAttribute('data-target');
         });
       }, 500);
-
-      // Initial Chart Render (Tab 1 is active on load)
-      renderCharts(data);
-      chartsRendered = true;
 
     })
     .catch(error => {

@@ -90,6 +90,50 @@
     "advanceCollected": 1827615663,
     "amountWithdrawn": 1416601723
   },
+  "sitePlanServices": [
+    {
+      "id": "STP",
+      "name": "Sewage Treatment",
+      "progress": 25,
+      "top": "70%",
+      "left": "28%"
+    },
+    {
+      "id": "GAS",
+      "name": "Gas Bank",
+      "progress": 0,
+      "top": "68%",
+      "left": "21%"
+    },
+    {
+      "id": "DG",
+      "name": "Diesel Gen.",
+      "progress": 0,
+      "top": "52%",
+      "left": "36%"
+    },
+    {
+      "id": "TR",
+      "name": "Transformer",
+      "progress": 0,
+      "top": "54%",
+      "left": "42%"
+    },
+    {
+      "id": "OWC",
+      "name": "Organic Waste",
+      "progress": 10,
+      "top": "55%",
+      "left": "53%"
+    },
+    {
+      "id": "WTR",
+      "name": "Water Sump",
+      "progress": 30,
+      "top": "75%",
+      "left": "57%"
+    }
+  ],
   "subStructure": [
     {
       "name": "Earth work and other leveling",
@@ -611,7 +655,7 @@
       "note": "Fully functional in Phase 1"
     },
     {
-      "name": "Sewage Treatment Plant (STP)",
+      "name": "Sewage Treatment Plant",
       "progress": 25,
       "icon": "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
       "note": "Dedicated for Phase 1"
@@ -623,10 +667,10 @@
       "note": "On-site wet waste processing"
     },
     {
-      "name": "Electricity & Power Backup",
+      "name": "Power Backup",
       "progress": 0,
       "icon": "M13 10V3L4 14h7v7l9-11h-7z",
-      "note": "Dedicated Transformer/DG for Ph 1"
+      "note": "Dedicated Transformer for Ph 1"
     },
     {
       "name": "Piped Gas Bank",
@@ -653,139 +697,75 @@
       "note": "Phase 1 specific gardens"
     }
   ],
-  "commonAreasProgress": [
-    {
-      "name": "Basement",
-      "progress": 30,
-      "icon": "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-    },
-    {
-      "name": "Staircases",
-      "progress": 10,
-      "icon": "M4 6h16M4 12h16m-7 6h7"
-    },
-    {
-      "name": "Lifts",
-      "progress": 0,
-      "icon": "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-    },
-    {
-      "name": "Corridor/Lobbies",
-      "progress": 0,
-      "icon": "M4 6h16M4 12h16M4 18h16"
-    },
-    {
-      "name": "Fire escapes",
-      "progress": 0,
-      "icon": "M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-    },
-    {
-      "name": "Common entrance and exit",
-      "progress": 0,
-      "icon": "M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-    },
-    {
-      "name": "Terrace",
-      "progress": 0,
-      "icon": "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-    },
-    {
-      "name": "Outer Wall",
-      "progress": 0,
-      "icon": "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1v-2zM16 13a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2zM4 21a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1v-2zM12 21a1 1 0 011-1h6a1 1 0 011 1v2a1 1 0 01-1 1h-6a1 1 0 01-1-1v-2z"
-    },
-    {
-      "name": "Open parking areas",
-      "progress": 0,
-      "icon": "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-    }
-  ],
   "faq": [
     {
-      "q": "What is the exact plan for piped gas line provisioning?",
-      "a": "The gas bank location and pipe routing are final. A private gas agency will supply every home through its own prepaid meter, managed like a mobile recharge, not by the Residents' Association."
-    },
-    {
-      "q": "Will the clubhouse be fully functional in Phase 1?",
-      "a": "Yes. The clubhouse will be completely built and fully functional as part of Phase 1 delivery."
-    },
-    {
-      "q": "Are the primary power backup and water facilities shared with Phase 2?",
-      "a": "No. Phase 1 has its own dedicated primary power backup (DG room/Transformer), Sewage Treatment Plant (STP), and underground water sump. Phase 2 will utilize its own separate infrastructure."
+      "q": "What is the status of the adjacent garbage dump yard?",
+      "a": "It is a private dump yard located entirely outside our boundary. It is situated approximately 230 meters from the site boundary and 280 meters from Wing F in a straight line.",
+      "image": "1000236100.png"
     },
     {
       "q": "How is day-to-day garbage disposal handled?",
-      "a": "Waste is segregated and wet waste is processed entirely on-site via our own in-house Organic Waste Converter (OWC) located at the basement level."
-    },
-    {
-      "q": "What is the status of the adjacent garbage dump yard?",
-      "a": "It is a private dump yard located entirely outside our boundary. It is situated approximately 230 meters from the site boundary and 280 meters from Wing F in a straight line."
+      "a": "Waste is segregated and wet waste is processed entirely on-site via our own in-house Organic Waste Converter (OWC) located at the basement level.",
+      "image": "1000236102.png"
     },
     {
       "q": "How do cabs and deliveries access the individual wings?",
-      "a": "Cabs use one common pick-up point, and two buggies serve every wing to transport residents. However, deliveries go door-to-door directly to every wing."
-    },
-    {
-      "q": "What is the sustainable water plan for the eventual 1,250 flats?",
-      "a": "There are currently 12 boreholes on site. We are actively using six of them for construction, and their yield is sufficient for all ongoing construction work."
+      "a": "Cabs use one common pick-up point, and two buggies serve every wing to transport residents. However, deliveries go door-to-door directly to every wing.",
+      "image": "1000236104.png"
     },
     {
       "q": "Is there provision for EV charging in visitor parking?",
-      "a": "Yes. Phase 1 has four visitor-parking zones, and each zone gets an electrical provision for EV charging. The exact number of chargers will be decided by the Residents' Association."
+      "a": "Yes. Phase 1 has four visitor-parking zones, and each zone gets an electrical provision for EV charging. The exact number of chargers will be decided by the Residents' Association.",
+      "image": "1000236108.png"
     },
     {
       "q": "Who maintains Fire and BESCOM safety audits after handover?",
-      "a": "At handover, fire and electrical approvals will be in place. Bricks & Milestones will maintain the building for the first year. After Year 1, the Residents' Association handles all renewals and inspections."
+      "a": "At handover, fire and electrical approvals will be in place. Bricks & Milestones will maintain the building for the first year. After Year 1, the Residents' Association handles all renewals and inspections.",
+      "image": "1000236112.png"
+    }
+  ],
+  "engineeringHighlights": [
+    {
+      "title": "5-Layer Mapei Waterproofing",
+      "desc": "Basement retaining walls are built with a certified 5-layer barrier applied by BPS: RCC Retaining Wall \u2794 Mapelastic Coat 1 \u2794 Mapenet 150 Mesh \u2794 Mapelastic Coat 2 \u2794 Dimple Board.",
+      "image": "1000236146.png"
+    },
+    {
+      "title": "Korean S-Form (Mivan Aluminium)",
+      "desc": "Monolithic one-pour walls and slabs cast in a fast 9-day floor cycle for superior strength, accuracy, and fewer joints.",
+      "image": "1000236158.png"
+    },
+    {
+      "title": "Captive On-Site RMC Plant",
+      "desc": "Concrete is batched and tested under our own control on site, backed by an in-house QC lab for consistent strength and full traceability.",
+      "image": "1000236170.png"
+    },
+    {
+      "title": "Premium Materials Under the Hood",
+      "desc": "Utilizing industry-leading brands across all disciplines, mapped meticulously from the bare concrete to the final fittings.",
+      "image": "1000236137.png"
     }
   ],
   "engineeringSpecs": [
     {
       "label": "Seismic Zone",
       "value": "Zone II",
-      "detail": "Bengaluru's seismic zone (IS 1893) with I=1.2 importance factor"
+      "detail": "Bengaluru's seismic zone (IS 1893) with I=1.2 factor"
     },
     {
-      "label": "Wind Speed Design",
+      "label": "Wind Design",
       "value": "33 m/s",
-      "detail": "Basic wind speed for Bengaluru (IS 875-3), Sway limit H/500"
+      "detail": "Basic wind speed (IS 875-3), Sway limit H/500"
     },
     {
       "label": "Structural Checks",
       "value": "1,292",
-      "detail": "Total structural checks on site, caught before concrete pour via pre-pour alignment audits"
+      "detail": "Total structural checks caught before concrete pour"
     },
     {
-      "label": "Soil Bearing Capacity",
+      "label": "Bearing Capacity",
       "value": "45 T/m\u00b2",
-      "detail": "Tested safe at 45 T/m\u00b2, but footings conservatively designed for 30 T/m\u00b2 (1.5x margin)"
-    },
-    {
-      "label": "Concrete Supply",
-      "value": "In-house RMC",
-      "detail": "Concrete batched and tested under our own control on site, with QC lab"
-    },
-    {
-      "label": "Storey Drift Limit",
-      "value": "0.004h",
-      "detail": "Each floor may shift no more than 0.4% of its height in an earthquake"
-    }
-  ],
-  "mivanFeatures": [
-    {
-      "title": "Monolithic",
-      "desc": "Walls and slab cast as one unit."
-    },
-    {
-      "title": "Accurate & Plaster-Free",
-      "desc": "Consistent thickness. Smooth finish requiring only a thin skim coat."
-    },
-    {
-      "title": "Fast 9-Day Cycles",
-      "desc": "Efficient planned floor sequence for speed and accuracy."
-    },
-    {
-      "title": "Fewer Joints",
-      "desc": "Minimal masonry junctions, eliminating common seepage paths."
+      "detail": "Tested safe at 45 T/m\u00b2, footings designed for 30 T/m\u00b2"
     }
   ],
   "projectPartners": [
@@ -795,65 +775,73 @@
     },
     {
       "role": "Structure & Services",
-      "name": "Design Tree Service Consultants"
+      "name": "Design Tree"
     },
     {
       "role": "Landscape",
-      "name": "Elements Landscape Architecture"
+      "name": "Elements Architecture"
     },
     {
       "role": "Project Management",
-      "name": "Creative Square Consultants"
+      "name": "Creative Square"
     },
     {
       "role": "Civil Contractor",
-      "name": "Sri Elite Plus Construction"
+      "name": "Sri Elite Plus"
     },
     {
-      "role": "Waterproofing Applicator",
-      "name": "BPS Building Protection Systems"
+      "role": "Waterproofing",
+      "name": "BPS Systems"
     }
   ],
   "premiumBrands": [
     {
       "category": "Elevators",
       "brand": "Fujitec",
-      "detail": "Seismic safety functions & laser sensors"
+      "detail": "Seismic safety sensors",
+      "logoUrl": "logo_fujitec.png"
     },
     {
       "category": "Sanitaryware",
       "brand": "TOTO",
-      "detail": "Stain resistant glaze & water saving"
+      "detail": "Stain resistant glaze",
+      "logoUrl": "logo_toto.png"
     },
     {
       "category": "Taps & Showers",
       "brand": "Hansgrohe",
-      "detail": "Chrome-plated brass, ceramic disc cartridges"
+      "detail": "Chrome-plated brass",
+      "logoUrl": "logo_hansgrohe.png"
     },
     {
       "category": "Electricals",
-      "brand": "Schneider & Polycab",
-      "detail": "99.97% pure copper wiring & MCB/RCCBs"
+      "brand": "Schneider",
+      "detail": "99.97% pure copper",
+      "logoUrl": "logo_schneider.png"
     },
     {
       "category": "Windows & Doors",
-      "brand": "Fenesta & Kelveneers",
-      "detail": "UPVC precision profiles & veneered flush doors"
+      "brand": "Fenesta",
+      "detail": "UPVC precision profiles",
+      "logoUrl": "logo_fenesta.png"
     },
     {
       "category": "Paint System",
       "brand": "Asian Paints",
-      "detail": "Tractor Suprema (Interior) & Allura Graniza (Exterior)"
+      "detail": "Tractor Suprema (Int)",
+      "logoUrl": "logo_asianpaints.png"
     },
     {
       "category": "Plumbing Pipes",
-      "brand": "Ashirvad TruFlo",
-      "detail": "CPVC heat-resistant & pressure tested"
+      "brand": "Ashirvad",
+      "detail": "CPVC heat-resistant",
+      "logoUrl": "logo_ashirvad.png"
     },
     {
-      "category": "Main Door Lock",
+      "category": "Main Door",
       "brand": "Yale",
-      "detail": "Keyless access & high security"
+      "detail": "Keyless access security",
+      "logoUrl": "logo_yale.png"
     }
   ]
 }
