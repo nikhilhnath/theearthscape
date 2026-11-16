@@ -173,6 +173,8 @@
       "wing": "Wing A",
       "overallCompletion": 1,
       "imageUrl": "wing-a.webp",
+      "plannedHandover": "Oct 2029",
+      "plannedCivil": "Apr 2029",
       "floors": [
         {
           "name": "Floor 26",
@@ -216,6 +218,8 @@
       "wing": "Wing B",
       "overallCompletion": 1,
       "imageUrl": "wing-b.webp",
+      "plannedHandover": "Sep 2029",
+      "plannedCivil": "Mar 2029",
       "floors": [
         {
           "name": "Floor 26",
@@ -259,6 +263,8 @@
       "wing": "Wing C",
       "overallCompletion": 11,
       "imageUrl": "wing-c.webp",
+      "plannedHandover": "Feb 2029",
+      "plannedCivil": "Aug 2028",
       "floors": [
         {
           "name": "Floor 26",
@@ -314,6 +320,8 @@
       "wing": "Wing D",
       "overallCompletion": 16,
       "imageUrl": "wing-d.webp",
+      "plannedHandover": "Dec 2028",
+      "plannedCivil": "Jun 2028",
       "floors": [
         {
           "name": "Floor 26",
@@ -385,6 +393,8 @@
       "wing": "Wing E",
       "overallCompletion": 4,
       "imageUrl": "wing-e.webp",
+      "plannedHandover": "May 2029",
+      "plannedCivil": "Nov 2028",
       "floors": [
         {
           "name": "Floor 26",
@@ -428,6 +438,8 @@
       "wing": "Wing F",
       "overallCompletion": 31,
       "imageUrl": "wing-f.webp",
+      "plannedHandover": "Aug 2028",
+      "plannedCivil": "Feb 2028",
       "floors": [
         {
           "name": "Floor 26",
@@ -563,6 +575,13 @@
       "file": "BSNL NOC.pdf"
     },
     {
+      "category": "Legal NOCs",
+      "title": "Hindustan Aeronautics Limited (HAL)",
+      "status": "Received",
+      "date": "Oct 2026",
+      "file": "PRMKARERA1251446PR020925008044.pdf"
+    },
+    {
       "category": "Financial Certificates",
       "title": "Form-4 CA Certificate",
       "status": "Q2 Uploaded",
@@ -586,64 +605,52 @@
   ],
   "amenitiesProgress": [
     {
+      "name": "Phase 1 Clubhouse",
+      "progress": 100,
+      "icon": "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+      "note": "Fully functional in Phase 1"
+    },
+    {
       "name": "Sewage Treatment Plant (STP)",
       "progress": 25,
-      "icon": "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+      "icon": "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
+      "note": "Dedicated for Phase 1"
     },
     {
-      "name": "Electricity",
-      "progress": 0,
-      "icon": "M13 10V3L4 14h7v7l9-11h-7z"
+      "name": "Organic Waste Converter",
+      "progress": 10,
+      "icon": "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
+      "note": "On-site wet waste processing"
     },
     {
-      "name": "CCTV Surveillance",
+      "name": "Electricity & Power Backup",
       "progress": 0,
-      "icon": "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+      "icon": "M13 10V3L4 14h7v7l9-11h-7z",
+      "note": "Dedicated Transformer/DG for Ph 1"
     },
     {
-      "name": "Club House",
+      "name": "Piped Gas Bank",
       "progress": 0,
-      "icon": "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+      "icon": "M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z",
+      "note": "Prepaid meters via private agency"
     },
     {
-      "name": "Community Hall",
+      "name": "EV Charging Zones",
       "progress": 0,
-      "icon": "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-    },
-    {
-      "name": "Outdoor Sports facility",
-      "progress": 0,
-      "icon": "M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-    },
-    {
-      "name": "Indoor Sports Facility",
-      "progress": 0,
-      "icon": "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      "icon": "M13 10V3L4 14h7v7l9-11h-7z",
+      "note": "4 visitor zones enabled for EV"
     },
     {
       "name": "Swimming Pool",
       "progress": 0,
-      "icon": "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+      "icon": "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+      "note": "Indoor pool in Clubhouse"
     },
     {
-      "name": "Gym",
+      "name": "Parks & Water Body",
       "progress": 0,
-      "icon": "M13 10V3L4 14h7v7l9-11h-7z"
-    },
-    {
-      "name": "Parks",
-      "progress": 0,
-      "icon": "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-    },
-    {
-      "name": "Power Backup",
-      "progress": 0,
-      "icon": "M13 10V3L4 14h7v7l9-11h-7z"
-    },
-    {
-      "name": "Water and Sanitation",
-      "progress": 0,
-      "icon": "M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+      "icon": "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+      "note": "Phase 1 specific gardens"
     }
   ],
   "commonAreasProgress": [
@@ -691,6 +698,162 @@
       "name": "Open parking areas",
       "progress": 0,
       "icon": "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+    }
+  ],
+  "faq": [
+    {
+      "q": "What is the exact plan for piped gas line provisioning?",
+      "a": "The gas bank location and pipe routing are final. A private gas agency will supply every home through its own prepaid meter, managed like a mobile recharge, not by the Residents' Association."
+    },
+    {
+      "q": "Will the clubhouse be fully functional in Phase 1?",
+      "a": "Yes. The clubhouse will be completely built and fully functional as part of Phase 1 delivery."
+    },
+    {
+      "q": "Are the primary power backup and water facilities shared with Phase 2?",
+      "a": "No. Phase 1 has its own dedicated primary power backup (DG room/Transformer), Sewage Treatment Plant (STP), and underground water sump. Phase 2 will utilize its own separate infrastructure."
+    },
+    {
+      "q": "How is day-to-day garbage disposal handled?",
+      "a": "Waste is segregated and wet waste is processed entirely on-site via our own in-house Organic Waste Converter (OWC) located at the basement level."
+    },
+    {
+      "q": "What is the status of the adjacent garbage dump yard?",
+      "a": "It is a private dump yard located entirely outside our boundary. It is situated approximately 230 meters from the site boundary and 280 meters from Wing F in a straight line."
+    },
+    {
+      "q": "How do cabs and deliveries access the individual wings?",
+      "a": "Cabs use one common pick-up point, and two buggies serve every wing to transport residents. However, deliveries go door-to-door directly to every wing."
+    },
+    {
+      "q": "What is the sustainable water plan for the eventual 1,250 flats?",
+      "a": "There are currently 12 boreholes on site. We are actively using six of them for construction, and their yield is sufficient for all ongoing construction work."
+    },
+    {
+      "q": "Is there provision for EV charging in visitor parking?",
+      "a": "Yes. Phase 1 has four visitor-parking zones, and each zone gets an electrical provision for EV charging. The exact number of chargers will be decided by the Residents' Association."
+    },
+    {
+      "q": "Who maintains Fire and BESCOM safety audits after handover?",
+      "a": "At handover, fire and electrical approvals will be in place. Bricks & Milestones will maintain the building for the first year. After Year 1, the Residents' Association handles all renewals and inspections."
+    }
+  ],
+  "engineeringSpecs": [
+    {
+      "label": "Seismic Zone",
+      "value": "Zone II",
+      "detail": "Bengaluru's seismic zone (IS 1893) with I=1.2 importance factor"
+    },
+    {
+      "label": "Wind Speed Design",
+      "value": "33 m/s",
+      "detail": "Basic wind speed for Bengaluru (IS 875-3), Sway limit H/500"
+    },
+    {
+      "label": "Structural Checks",
+      "value": "1,292",
+      "detail": "Total structural checks on site, caught before concrete pour via pre-pour alignment audits"
+    },
+    {
+      "label": "Soil Bearing Capacity",
+      "value": "45 T/m\u00b2",
+      "detail": "Tested safe at 45 T/m\u00b2, but footings conservatively designed for 30 T/m\u00b2 (1.5x margin)"
+    },
+    {
+      "label": "Concrete Supply",
+      "value": "In-house RMC",
+      "detail": "Concrete batched and tested under our own control on site, with QC lab"
+    },
+    {
+      "label": "Storey Drift Limit",
+      "value": "0.004h",
+      "detail": "Each floor may shift no more than 0.4% of its height in an earthquake"
+    }
+  ],
+  "mivanFeatures": [
+    {
+      "title": "Monolithic",
+      "desc": "Walls and slab cast as one unit."
+    },
+    {
+      "title": "Accurate & Plaster-Free",
+      "desc": "Consistent thickness. Smooth finish requiring only a thin skim coat."
+    },
+    {
+      "title": "Fast 9-Day Cycles",
+      "desc": "Efficient planned floor sequence for speed and accuracy."
+    },
+    {
+      "title": "Fewer Joints",
+      "desc": "Minimal masonry junctions, eliminating common seepage paths."
+    }
+  ],
+  "projectPartners": [
+    {
+      "role": "Architecture",
+      "name": "Venkataramanan Associates"
+    },
+    {
+      "role": "Structure & Services",
+      "name": "Design Tree Service Consultants"
+    },
+    {
+      "role": "Landscape",
+      "name": "Elements Landscape Architecture"
+    },
+    {
+      "role": "Project Management",
+      "name": "Creative Square Consultants"
+    },
+    {
+      "role": "Civil Contractor",
+      "name": "Sri Elite Plus Construction"
+    },
+    {
+      "role": "Waterproofing Applicator",
+      "name": "BPS Building Protection Systems"
+    }
+  ],
+  "premiumBrands": [
+    {
+      "category": "Elevators",
+      "brand": "Fujitec",
+      "detail": "Seismic safety functions & laser sensors"
+    },
+    {
+      "category": "Sanitaryware",
+      "brand": "TOTO",
+      "detail": "Stain resistant glaze & water saving"
+    },
+    {
+      "category": "Taps & Showers",
+      "brand": "Hansgrohe",
+      "detail": "Chrome-plated brass, ceramic disc cartridges"
+    },
+    {
+      "category": "Electricals",
+      "brand": "Schneider & Polycab",
+      "detail": "99.97% pure copper wiring & MCB/RCCBs"
+    },
+    {
+      "category": "Windows & Doors",
+      "brand": "Fenesta & Kelveneers",
+      "detail": "UPVC precision profiles & veneered flush doors"
+    },
+    {
+      "category": "Paint System",
+      "brand": "Asian Paints",
+      "detail": "Tractor Suprema (Interior) & Allura Graniza (Exterior)"
+    },
+    {
+      "category": "Plumbing Pipes",
+      "brand": "Ashirvad TruFlo",
+      "detail": "CPVC heat-resistant & pressure tested"
+    },
+    {
+      "category": "Main Door Lock",
+      "brand": "Yale",
+      "detail": "Keyless access & high security"
     }
   ]
 }
